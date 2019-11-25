@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="project, infoiasi, web, photos, videos, media" />
+    <link rel="shortcut icon" type="image/png" href="imagini/favicon.png" />
+    <title>Documentatie-ecaw</title>
+    <link rel="stylesheet" href="scholarly.css">
+    <link rel="stylesheet" href="prism-coy.css">
+    <script src="node_modules/prismjs/prism.js" defer></script>
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+    <header>
+        <p class="title">Ecaw</p>
+        <p class="subtitle">Ecaw</p>
+    </header>
+    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+        <h1>Ecaw</h1>
+        <section>
+            <h2 style="display: none">Section</h2>
+            <ol>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="#" typeof="schema:Person">
+                        <span property="schema:givenName">Valentin George</span>
+                        <span property="schema:familyName">Todireanu</span>
+                    </a>
+                </li>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="#" typeof="schema:Person">
+                        <span property="schema:givenName">Maria-Alexandra</span>
+                        <span property="schema:familyName">Purice</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+
+        <section typeof="sa:Abstract" id="abstract">
+            <h2>Abstract</h2>
+            <p>
+                În conținutul lucrarii se regasesc urmatoarele: Introducere, Tehnologii utilizate, Arhitectura
+                aplicatiei, Etapele de dezvoltare, Concluzie, Bibliografie
+            </p>
+        </section>
+        <section typeof="sa:Introducere" id="intro">
+            <h2>Introducere</h2>
+            <p>
+                Ecaw este o aplicatie web extensibila pentru crearea digitala a unor ilustrate de diverse categorii si
+                impartasirea acestora cu cei dragi.
+            </p>
+        </section>
+        <section typeof="sa:MaterialsAndMethods" id="tehnologii">
+            <h2>Tehnologii</h2>
+            <h3>HTML</h3>
+            <p>
+                HyperText Markup Language (HTML) este un limbaj de marcare utilizat pentru crearea paginilor web ce pot
+                fi afișate într-un browser (sau navigator). Scopul HTML este mai degrabă prezentarea informațiilor –
+                paragrafe, fonturi, tabele ș.a.m.d. – decât descrierea
+                semanticii documentului.HTML este prescurtarea de la Hyper Text Mark-up Language si este codul care sta
+                la baza paginilor web. Va fi folosit in cadrul scheletului principal al proiectului .
+            </p>
+            <h3>CSS</h3>
+            <p>
+                CSS (Cascading Style Sheets) este un standard pentru formatarea elementelor unui document HTML.
+                Stilurile se pot atașa elementelor HTML prin intermediul unor fișiere externe sau în cadrul
+                documentului. CSS se poate utiliza și pentru formatarea elementelor XHTML, XML și SVGL.
+                Intregul design al aplicatiei se va fi realizat si formatat prin intermediul CSS.
+            </p>
+            <h3>Javascript </h3>
+            <p>
+                JavaScript (JS) este un limbaj de programare orientat obiect bazat pe conceptul prototipurilor. Este
+                folosit mai ales pentru introducerea unor funcționalități în paginile web, codul Javascript din aceste
+                pagini fiind rulat de către browser.
+            </p>
+            <h3>Node.js</h3>
+            <p>
+                Node.js este o platformă de dezvoltare a surselor deschise pentru executarea codului JavaScript din
+                partea serverului. Node este util pentru dezvoltarea aplicațiilor care necesită o conexiune persistentă
+                de la browser la server și este adesea utilizat pentru aplicații în timp real, cum ar fi chat-uri,
+                fluxuri de știri și notificări push web.
+            </p>
+            <h3>GitHub</h3>
+            <p>
+                Reprezinta un sistem de control al versiunilor codului sursa care va fi folosit pentru o mai buna
+                administrare cat si pentru lucrul in echipa.
+            </p>
+            <h3>MongoDb</h3>
+            <p>
+                Reprezinta un o baza de date NoSQL orientata catre documente, folosita pentru un pentru stocarea datelor
+                cu volum mare. Se incadreaza in categoria unei baze de date NoSQl.
+            </p>
+        </section>
+        <section typeof="sa:MaterialsAndMethods" id="arhitectura">
+            <h2>Arhitectura aplicatiei</h2>
+            <p>
+                Utilizand tehnologiile mentionate in sectiunea anterioara, aplicatia va fi structurata in mai multe
+                module, dupa cum urmeaza:
+            </p>
+            <p><strong>1. Login </strong></p>
+            <p>
+                Petru a putea interactiona cu aplicatia, fiecare utilizator trebuie sa se logeze cu ajutorul contului de
+                Facebook.
+                Clientul trimite catre server contul de facebook al utilizatorului.
+                In cazul in care datele sunt stocate cu succes in tabela USERS, serverul trimite catre client un raspuns
+                cu statusul 200 si cu messajul: Login Successful, altel statusul 404.
+            </p>
+
+            <p><strong>2. Pagina principala</strong></p>
+            <p>
+                Dupa logare, utilizatorul va fi redirectionat catre pagina principala care contine spatiul pentru
+                realizarea cardului dorit. Acest spatiu este un canvas in care utilizatorul poate uploada fisiere din
+                computerul personal sau poate cauta prin intermediul campului de Search aflat in dreapta sus, orice
+                imagine doreste; poate modifica elementele atasate prin drag & drop sau editarea cu ajutorului
+                toolbar-ului aflat in dreapta paginii.
+                Cand utilizatorul doreste sa caute o imagine cu ajutorul campului SEARCH, serverul va cauta cu ajutorul
+                lui google search api (serpapi.com) si va trimite catre client imaginile gasite, iar clientul va putea
+                selecta o imagine din rezultatele gasite.
+                Atunci cand utilizatorul apasa butonul de Textbox, acesta poate introduce textul dorit, de asemenea, sub
+                butonul de SEARCH se va gasit toolbar-ul prin care utilizatorul poate edita dupa cum doreste
+                elementele introduse in canvas.
+                La apasarea butornul SAVE aflat sub canvas, clientul trimite toate datele aflate pe card. Serverul
+                primeste prin body-ul requestului infomatiile pe care mai apoi le salveaza in tabelele corespunzatore.
+                Daca salvarea se va finaliza cu succes serverul trimite catre client statusul 200 si mesajul: Insert
+                successful. Daca nu va trimite statusul 404.
+            </p>
+
+            <p><strong>3. Link-ul catre card</strong></p>
+            <p>
+                Link-ul care poate fi partajat prin reletele de socializare va putea fi accesat de cei care doresc.
+                Serverul face un get pe baza id-ului din url iar clientul afiseaza cardul.
+            </p>
+
+            <p><strong>4. Formularul de editare </strong></p>
+            <p>
+                Formularul de editare poate fi accesat doar de cei ce au facut cardul selectat. Utilizatorul selecteaza
+                cardul pe care il doreste sa il editeze. In sectiunea canvasului se va randa cardul iar apoi se va putea
+                modifica in mod obisnuit cu toolbar-ul aflat in dreapta paginii. La apasarea butornului "SAVE" se va
+                face update cu noile modificari in tabele prim metoda put. Serverul cauta cardul seletat pe baza id-ului
+                aflat in parametrii requestului iar mai apoi va lua din request campurile modificate si va face update
+                in tabelele corespunzatoare. Daca operatiunea va fi finalizata cu succes, serverul va trimite statusul:
+                201 si mesajul Update Successful. Altfel va intoarce status code-ul : 404.
+            </p>
+
+
+        </section>
+        <h2>Etape de dezvoltare</h2>
+        <h4>
+            Aplicatia noastra web va fi dezvoltata in urmatoarele etape:
+        </h4>
+        <ol>
+            <li>Arhitectura aplicaţiei Web</li>
+            <li>Soluţia completă </li>
+        </ol>
+        <section typeof="sa:Conclusion" id="conclusion">
+            <h2>Concluzie</h2>
+            <p>
+                În concluzie, aplicatia ECAW este Web extensibila pentru crearea digitala a unor ilustrate de diverse
+                categorii si impartasirea acestora cu cei dragi. Pentru editare, vor fi implementate operatii precum
+                undo-redo, drag & drop etc. Ilustrata virtuala va poate fi partajata pe diverse retele sociale si prin
+                posta electronica.
+            </p>
+        </section>
+        <section typeof="sa:ReferenceList" id="references">
+            <h2>Bibliografie</h2>
+            <ol>
+                <li typeof="schema:ScholarlyArticle"
+                    resource="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf">
+                    <a
+                        href="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf">
+                        https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf
+                    </a>
+                </li>
+
+                <li typeof="schema:ScholarlyArticle" resource="http://fabricjs.com/docs/">
+                    <a href="http://fabricjs.com/docs/">
+                        http://fabricjs.com/docs/
+                    </a>
+                </li>
+                <li typeof="schema:ScholarlyArticle"
+                    resource="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">
+                        https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+                    </a>
+                </li>
+                <li typeof="schema:ScholarlyArticle" resource="https://www.guru99.com/what-is-mongodb.html">
+                    <a href="https://www.guru99.com/what-is-mongodb.html">
+                        https://www.guru99.com/what-is-mongodb.html
+                    </a>
+                </li>
+            </ol>
+        </section>
+    </article>
+</body>
+
+</html>
