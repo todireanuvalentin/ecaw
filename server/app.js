@@ -5,17 +5,16 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const path = require("path");
-// const photo = require("./routes/photos/post");
-// const results = require("./routes/results/get");
-
+const postLogin = require('./routes/login/post');
+const getLogin = require('./routes/login/get');
 const app = express();
 
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use(bodyParser.json({ limit: "100mb" }));
-// app.use("/photo", photo);
-// app.use("/results", results);
+app.use('/login', postLogin);
+app.use('/lala', getLogin);
 
 mongoose 
   .connect(
