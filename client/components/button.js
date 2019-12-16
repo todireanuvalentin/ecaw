@@ -4,7 +4,7 @@ class Button extends HTMLElement {
   };
 
   connectedCallback() {
-    this.innerHTML = `<button type="button" onclick="document.location+='#home';return false;"> Login </button>`;
+    this.innerHTML = `<button type="button"> Login </button>`;
   }
 }
 
