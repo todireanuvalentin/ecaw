@@ -6,17 +6,17 @@ const mongoose = require("mongoose");
 router.post("/", (req, res, next) => {
   const { user, password } = req.body;
 
-  const login = new User({
+  const newUser = new User({
     _id: new mongoose.Types.ObjectId(),
     user,
     password
   });
 
-  login
+  newUser
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Insert User"
+        message: "Register successfully done"
       });
     })
     .catch(err => {

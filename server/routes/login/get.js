@@ -6,19 +6,14 @@ const mongoose = require("mongoose");
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
 
-  user
-    .findById(id)
-    .select("name password")
-    .exec()
-    .then(document => {
-      const response = document.map(index => {
-        return {
-          _id: index._id,
-          name,
-          password
-        };
-      });
-      res.status(200).json(response);
-    })
-    .catch(error => console.log(error));
+    User.find({_id:id})
+  .then(function(document){
+    return res.json(document);
+  }).catch(err => {
+    res.status(500).json({
+      error: err
+    });
+  });
+
 });
+  module.exports = router;

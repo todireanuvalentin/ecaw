@@ -7,9 +7,8 @@ class Login extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("intra");
-
     this.innerHTML = `
+    <input-comp></input-comp>
     <input-comp></input-comp>
     <button-comp></button-comp>
     `;
