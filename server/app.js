@@ -10,12 +10,19 @@ const getLogin = require('./routes/login/get');
 const app = express();
 
 app.use(cors());
+app.options('*', cors())
+
 
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use(bodyParser.json({ limit: "100mb" }));
+
 app.use('/register', require('./routes/login/register'));
-app.use('/login', require('./routes/login/login'));
+
+app.use('/login',require('./routes/login/login'));
 app.use('/lala', getLogin);
+
+
+
 
 mongoose 
   .connect(

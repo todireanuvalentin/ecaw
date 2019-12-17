@@ -15,7 +15,7 @@ router.post("/", (req, res, next) => {
     let jww = jwt.sign(thisUser,secret,{expiresIn:"60m"});
      res.json(jww);
   }).catch(err =>{
-    res.json({"error":"invalid user or password "});
+    res.status(401).json({"error":"invalid user or password "});
 })
 });
 
