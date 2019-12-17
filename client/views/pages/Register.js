@@ -4,7 +4,7 @@ import Utils        from './../../services/Utils.js'
 
 
 let Register = {
-
+    
     render: async () => {
         return /*html*/ `
             <section class="section">
