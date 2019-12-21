@@ -6,9 +6,6 @@ let Navbar = {
     render: async () => {
         let loggedData =  /*html*/ `
         <div class="navbar-start">
-        <a class="navbar-item" href="/#/">
-            Your cards
-        </a>
         <a class="navbar-item" href="/#/create">
             Create new Card
         </a>
@@ -21,7 +18,7 @@ let Navbar = {
            <div class="container">
                <div class="navbar-brand">
                    <a class="navbar-item" href="/#/">
-                       <img src="https://c.imge.to/2019/12/17/vVGIy1.png" width="AUTO" height="AUTO">
+                       <img src="views/images/home.png" width="AUTO" height="AUTO">
                    </a>
 
                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
