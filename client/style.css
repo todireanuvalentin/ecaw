@@ -1,0 +1,153 @@
+* {
+  font-family: "Nanum Gothic", sans-serif;
+  box-sizing: border-box;
+}
+
+/* ---------------------- login & register ---------------------- */
+
+.login-section,
+.register-section {
+  margin: 200px auto;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.login-section label,
+.login-section input,
+.register-section label,
+.register-section input {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+}
+.login-section label,
+.register-section label {
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 6px 0 0 0;
+  color: #00796b;
+}
+
+.login-section input,
+.register-section input{
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 16px;
+}
+
+.login-section button,
+.register-section button {
+  font-size: 16px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login-section .login-button,
+.register-section .register-button {
+  color: #00796b;
+}
+
+.login-section .register-button {
+  color: #ffa000;
+}
+
+.login-section button:hover,
+.register-section button:hover {
+  background-color: #00796b;
+  transition: 0.3s ease-in-out;
+  color: white;
+  border: 1px solid #00796b;
+  opacity: 0.8;
+}
+
+.login-section .login-button:hover {
+  background-color: #00796b;
+  border: 1px solid #00796b;
+}
+
+.login-section .register-button:hover {
+  background-color: #ffa000;
+  border: 1px solid #ffa000;
+}
+
+.login-section .action-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+button:focus {
+  outline: none;
+}
+
+#error-message {
+  visibility: hidden;
+  margin: 0 auto !important;
+  background-color: #e57373;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  top: 30px;
+  font-size: 16px;
+  opacity: 0.8;
+  left: 38%;
+}
+
+#error-message.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0.8;
+  }
+  to {
+    top: 30px;
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0.8;
+  }
+  to {
+    top: 30px;
+    opacity: 0.8;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 0.8;
+  }
+  to {
+    top: 0;
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+/* ---------------------- register ---------------------- */

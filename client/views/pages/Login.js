@@ -1,58 +1,61 @@
-import { Request } from '../../services/http.js';
+import { Request } from "../../services/http.js";
+import Utils from "../../services/Utils.js";
+
+const BASE_URL = "http://localhost:3000";
 
 const Login = {
   render: () => {
-    return /*html*/ `
-            <section class="section">
-                <div class="field">
-                    <p class="control">
-                        <input class="input" id="username" type="email" placeholder="Username">
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control">
-                        <input class="input" id="pass" type="password" placeholder="Password">
-                      
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-primary" id="loginBtn">
-                        Log in
-                        </button>
-                    </p>
-                </div>
-
-            </section>
-        `;
+    return `
+    <div id="error-message">Username or password is incorrect! Please try again!</div>
+    <section class="login-section">
+      <label for="username">Username</label>
+      <input id="username" type="email" />
+      <label for="pass">Password</label>  
+      <input id="pass" type="password" />
+      <div class="action-section">
+        <button id="loginBtn" class="login-button">Log in</button>
+        <button id="goToRegisterBtn" class="register-button">Register</button>
+      </div>
+    </section>`;
   },
   registerEventHandlers: () => {
     document.getElementById("loginBtn").addEventListener("click", () => {
       let user = document.getElementById("username").value;
       let password = document.getElementById("pass").value;
       const payload = { user, password };
-      const url = "http://localhost:3000/login";
+      const url = `${BASE_URL}/login`;
 
-      Request("POST", url, payload).then(response => console.log(response));
+      if (user && password)
+        Request("POST", url, payload).then(json => {
+          if (json.error) {
+            const loginSection = document.getElementById("error-message");
+            loginSection.className = "show";
+            setTimeout(() => {
+              loginSection.className = loginSection.className.replace(
+                "show",
+                ""
+              );
+            }, 3000);
+            return false;
+          } else {
+            Utils.setCookie("jwt", json, 1);
+            window.location.hash = "#create";
+          }
+        });
+      else {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.className = "show";
+        setTimeout(() => {
+          errorMessage.className = errorMessage.className.replace("show", "");
+        }, 3000);
+        return false;
+      }
+    });
 
-      // fetch("http://localhost:3000/login", options)
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     if (json.error) // show error and return false
-      //     if (!json.error) {
-      //       setCookie("jwt", json, 1);
-      //       window.location.hash = "#/";
-      //     }
-      //   });
+    document.getElementById("goToRegisterBtn").addEventListener("click", () => {
+      window.location.hash = "#register";
     });
   }
 };
-
-function setCookie(cname, cvalue, hours) {
-  var d = new Date();
-  d.setTime(d.getTime() + hours * 60 * 60 * 1000);
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
 
 export default Login;

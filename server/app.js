@@ -22,15 +22,12 @@ app.use(bodyParser.json({ limit: "100mb" }));
 
 app.use('/register', require('./routes/login/register'));
 
-app.use('/login',require('./routes/login/login'));
+app.use('/login', require('./routes/login/login'));
 app.use('/verify', getLogin);
 app.use('/create', postCard);
 app.use('/get', getCard);
 app.use('/isOwner', isOwner);
 app.use('/update', update);
-
-
-
 
 mongoose 
   .connect(
