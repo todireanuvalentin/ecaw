@@ -38,7 +38,7 @@ const Login = {
             }, 3000);
             return false;
           } else {
-            Utils.setCookie("jwt", json, 1);
+            Utils.setCookie("jwt", json.token, 1);
             window.location.hash = "#create";
           }
         });

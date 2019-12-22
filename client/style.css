@@ -84,7 +84,8 @@ button:focus {
   outline: none;
 }
 
-#error-message {
+#error-message, 
+#server-error-message{
   visibility: hidden;
   margin: 0 auto !important;
   background-color: #e57373;
@@ -100,7 +101,8 @@ button:focus {
   left: 38%;
 }
 
-#error-message.show {
+#error-message.show,
+#server-error-message.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

@@ -6,6 +6,7 @@ const Register = {
   render: () => {
     return `
       <div id="error-message">Something went wrong. Please try again!</div>
+      <div id="server-error-message">Username already exists</div>
       <section class="register-section">
         <label for="username">Username</label>
         <input id="username" type="email" required />
@@ -25,19 +26,33 @@ const Register = {
       const payload = { user, password, rpassword };
 
       if (password === rpassword && user && password && rpassword)
-        Request("POST", url, payload).then(json => {
-          if (json.error) {
-            const errorMessage = document.getElementById("error-message");
-            errorMessage.className = "show";
-            setTimeout(() => {
-              errorMessage.className = errorMessage.className.replace(
-                "show",
-                ""
-              );
-            }, 3000);
-            return false;
-          } else window.location.hash = "#create";
-        });
+        Request("POST", url, payload)
+          .then(json => {
+            if (json.error) {
+              const errorMessage = document.getElementById("error-message");
+              errorMessage.className = "show";
+              setTimeout(() => {
+                errorMessage.className = errorMessage.className.replace(
+                  "show",
+                  ""
+                );
+              }, 3000);
+              return false;
+            } else {
+              if (json.message) {
+                const errorMessage = document.getElementById("server-error-message");
+                errorMessage.className = "show";
+                setTimeout(() => {
+                  errorMessage.className = errorMessage.className.replace(
+                    "show",
+                    ""
+                  );
+                }, 3000);
+                return false;
+              } else window.location.hash = "#create";
+            }
+          })
+          .catch(msg => console.log("intra in catch"));
       else {
         const errorMessage = document.getElementById("error-message");
         errorMessage.className = "show";
