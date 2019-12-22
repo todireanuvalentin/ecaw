@@ -1,17 +1,15 @@
-import Utils        from './../../services/Utils.js'
-
+import Utils from "./../../services/Utils.js";
 
 let Logout = {
-
-    render : async () => {
-        let view =  /*html*/`
+  render: async () => {
+    let view = /*html*/ `
             logged out 
-        `
-        return view
-    }
-    , after_render: async () => {
-        document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        window.location.hash = '#/login';
-    }
-}
+        `;
+    return view;
+  },
+  registerEventHandlers: async () => {
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    window.location.hash = "#/login";
+  }
+};
 export default Logout;

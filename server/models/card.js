@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require('mongoose-unique-validator');
 
 const CardSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -20,6 +19,5 @@ const CardSchema = new mongoose.Schema({
     required:true
   }
 });
-//CardSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Card", CardSchema);

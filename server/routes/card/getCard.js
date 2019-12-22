@@ -3,45 +3,43 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const jwt = require('jsonwebtoken');
-const secret = "7306a2b35da8e825c4b9e16177be028c44183c01f67a9c6a5b80844376f0425b02b6bc0d62087963513a4355fcb1a539e6dac0e1d4eb8969e62805bf522a783b";
+const jwt = require("jsonwebtoken");
+const secret =
+  "7306a2b35da8e825c4b9e16177be028c44183c01f67a9c6a5b80844376f0425b02b6bc0d62087963513a4355fcb1a539e6dac0e1d4eb8969e62805bf522a783b";
 
 router.get("/:id", (req, res, next) => {
-    let id = req.params.id;
+  let id = req.params.id;
 
-
-    Card.find({
-            "_id": id
-        })
-        .then(function (document) {
-
-            res.json(document);
-        }).catch(err => {
-            res.status(404).json({
-                "error": "card not founded"
-            });
-        })
+  Card.find({
+    _id: id
+  })
+    .then(function(document) {
+      res.json(document);
+    })
+    .catch(err => {
+      res.status(404).json({
+        error: "card not founded"
+      });
+    });
 });
 router.post("/", (req, res, next) => {
-    let token = req.body.jwt;
-    
-    jwt.verify(token, secret, function (err, decoded) {
-        if (!err) {
-            Card.find({
-                    "userId": decoded.id
-                })
-                .then(function (document) {
-                    res.json(document);
-                }).catch(err => {
-                    res.status(404).json({
-                        "error": "card not founded"
-                    });
-                })
-        }
-        else res.status(404).json({"error": "card not founded"})
+  let token = req.body.jwt;
 
-    })
-
+  jwt.verify(token, secret, function(err, decoded) {
+    if (!err) {
+      Card.find({
+        userId: decoded.id
+      })
+        .then(function(document) {
+          res.json(document);
+        })
+        .catch(err => {
+          res.status(404).json({
+            error: "card not founded"
+          });
+        });
+    } else res.status(404).json({ error: "card not founded" });
+  });
 });
 
 module.exports = router;

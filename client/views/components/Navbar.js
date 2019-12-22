@@ -80,7 +80,7 @@ let Navbar = {
 
         return view
     },
-    after_render: async () => { }
+    registerEventHandlers: async () => { }
 
 }
 export default Navbar;
