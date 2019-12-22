@@ -65,8 +65,9 @@ let Navbar = {
         
         
         
-        let isLoggedIn = Utils.loggedIn();
+        let isLoggedIn =await Utils.loggedIn();
         let view,view2;
+        //console.log(isLoggedIn);
         if(!isLoggedIn)
         view2 = view2_1 +view2RS+view2_2;
         else 

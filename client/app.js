@@ -16,6 +16,7 @@ import Utils        from './services/Utils.js'
 const routes = {
     '/'             : Home
     , '/create'      : create
+    , '/create/:id'      : create
     , '/card/:id'      : PostShow
     , '/register'   : Register
     , '/login'   : Login

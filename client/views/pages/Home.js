@@ -5,13 +5,14 @@ import Utils        from './../../services/Utils.js'
 
 let getPostsList = async () => {
      const options = {
-        method: 'GET',
+        method: 'POST',
+        body: JSON.stringify({ "jwt": Utils.getCookie("jwt")}),
         headers: {
             'Content-Type': 'application/json'
         }
     };
     try {
-        const response = await fetch(`https://5bb634f6695f8d001496c082.mockapi.io/api/posts`, options)
+        const response = await fetch(`http://localhost:3000/get`, options)
         const json = await response.json();
         // console.log(json)
         return json
@@ -23,15 +24,15 @@ let getPostsList = async () => {
 let Home = {
     render : async () => {
         let posts = await getPostsList()
-        Utils.redirectIfNotLoggedIn();
+        
+        await Utils.redirectIfNotLoggedIn();
         let view =  /*html*/`
             <section class="section">
-                <h1> Home </h1>
                 <ul>
-                    ${ posts.map(post => 
-                        /*html*/`<li><a href="#/card/${post.id}">${post.title}</a></li>`
-                        ).join('\n ')
-                    }
+                ${ posts.map(post => 
+                    /*html*/`<li><h3>${post.description}</h3></br><a href="#/create/${post._id}">edit </a><a href="#/card/${post._id}"><img src="${post.img}" width="100px" heigth="100px"></a></li>`
+                    ).join(' ')
+                }
                 </ul>
             </section>
         `

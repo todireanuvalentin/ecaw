@@ -47,11 +47,11 @@ let Login = {
               }),
                json: true };
 
-            console.log(user + " " + password)
+           // console.log(user + " " + password)
             fetch("http://localhost:3000/login", settings)
               .then(response => response.json())
               .then(json => {
-                console.log(json)
+               // console.log(json)
                 if(!json.error)
                 {setCookie("jwt",json,1);
                 window.location.hash = '#/';

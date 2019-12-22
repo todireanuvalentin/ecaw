@@ -2,6 +2,14 @@ const User = require("../../models/user");
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+mongoose 
+  .connect(
+    "mongodb+srv://todireanugeorge15:alabalaportocala@cluster0-otq8c.mongodb.net/test?retryWrites=true&w=majority"
+    )
+  .then(result => {
+    app.listen(3000);
+  })
+  .catch(err => console.log(err));
 
 router.post("/", (req, res, next) => {
   const { user, password } = req.body;

@@ -4,7 +4,7 @@ import Utils        from './../../services/Utils.js'
 let Error404 = {
 
     render : async () => {
-        Utils.redirectIfNotLoggedIn();
+        await Utils.redirectIfNotLoggedIn();
         let view =  /*html*/`
             <section class="section">
                 <h1> 404 Error </h1>
