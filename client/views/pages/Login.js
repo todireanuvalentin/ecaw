@@ -27,7 +27,7 @@ const Login = {
 
       if (user && password)
         Request("POST", url, payload).then(json => {
-          if (json.error) {
+          if (json.message === "Login failed" || json.error) {
             const loginSection = document.getElementById("error-message");
             loginSection.className = "show";
             setTimeout(() => {
