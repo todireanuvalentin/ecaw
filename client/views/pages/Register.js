@@ -39,7 +39,7 @@ const Register = {
               }, 3000);
               return false;
             } else {
-              if (json.message) {
+              if (json.message === "Username already exists") {
                 const errorMessage = document.getElementById("server-error-message");
                 errorMessage.className = "show";
                 setTimeout(() => {
