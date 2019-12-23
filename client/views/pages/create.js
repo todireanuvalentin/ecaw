@@ -44,6 +44,7 @@ const create = {
               
               <input type="range" min="0" max="1" step="0.01" value="0.5" class="slider" id="opacity">
               <button id="saveCard" type="button">Save</button>
+              <button id="clearCanvas" type="button">Clear</button>
             </section>
           </main>
             `;
@@ -60,6 +61,7 @@ function draw() {
   let drawButton = document.getElementById("newDrawLine");
   let lineButton = document.getElementById("newLine");
   let save = document.getElementById("saveCard");
+  let clear = document.getElementById("clearCanvas");
 
   opacitySlider.addEventListener("input", () => {
     functions.opacity(canvas, opacitySlider.value);
@@ -98,6 +100,10 @@ function draw() {
 
   save.addEventListener("click", () => {
     functions.save(canvas);
+  });
+
+  clear.addEventListener("click", () => {
+    canvas.clear();
   });
 }
 export default create;
