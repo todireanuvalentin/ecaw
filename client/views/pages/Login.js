@@ -1,7 +1,5 @@
-import { Request } from "../../services/http.js";
+import { Request, BASE_URL } from "../../services/http.js";
 import Utils from "../../services/Utils.js";
-
-const BASE_URL = "http://localhost:3000";
 
 const Login = {
   render: () => {

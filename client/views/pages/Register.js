@@ -1,6 +1,4 @@
-import { Request } from "../../services/http.js";
-
-const BASE_URL = "http://localhost:3000";
+import { Request, BASE_URL } from "../../services/http.js";
 
 const Register = {
   render: () => {
@@ -40,7 +38,9 @@ const Register = {
               return false;
             } else {
               if (json.message === "Username already exists") {
-                const errorMessage = document.getElementById("server-error-message");
+                const errorMessage = document.getElementById(
+                  "server-error-message"
+                );
                 errorMessage.className = "show";
                 setTimeout(() => {
                   errorMessage.className = errorMessage.className.replace(

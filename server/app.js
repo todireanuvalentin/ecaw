@@ -24,7 +24,7 @@ app.use('/register', postRegister);
 app.use('/login', postLogin);
 app.use('/verify', getLogin);
 app.use('/create', postCard);
-app.use('/get', getCard);
+app.use('/cards', getCard);
 app.use('/isOwner', isOwner);
 app.use('/update', update);
 

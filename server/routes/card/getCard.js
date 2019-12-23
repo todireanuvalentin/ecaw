@@ -22,23 +22,20 @@ router.get("/:id", (req, res, next) => {
       });
     });
 });
+
 router.post("/", (req, res, next) => {
   let token = req.body.jwt;
 
   jwt.verify(token, secret, function(err, decoded) {
     if (!err) {
-      Card.find({
-        userId: decoded.id
-      })
-        .then(function(document) {
-          res.json(document);
-        })
-        .catch(err => {
+      Card.find({ userId: decoded.id })
+        .then(document => res.json(document))
+        .catch(_err =>
           res.status(404).json({
-            error: "card not founded"
-          });
-        });
-    } else res.status(404).json({ error: "card not founded" });
+            error: "Can not save card"
+          })
+        );
+    } else res.status(404).json({ error: "The session has expired" });
   });
 });
 
