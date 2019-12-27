@@ -2,14 +2,13 @@ import Utils from "../services/Utils.js";
 import { Request, BASE_URL } from "../../services/http.js";
 
 const functions = {
-  randomColor: canvas => {
-    if (!canvas.getActiveObject()) console.log("selecteaza ceva bos");
+  changeColor: (canvas, color) => {
+    if (!canvas.getActiveObject()) console.error("Select an element");
     else if (canvas.getActiveObject().type !== "activeSelection")
-      canvas._activeObject.set("fill", getRandomRgb());
+      canvas._activeObject.set("fill", color);
     else
       for (let i = 0; i < canvas.getActiveObject()._objects.length; i++)
-        canvas._activeObject._objects[i].set("fill", getRandomRgb());
-   
+        canvas._activeObject._objects[i].set("fill", color);
     canvas.renderAll();
   },
   opacity: (canvas, opacity) => {
@@ -31,8 +30,8 @@ const functions = {
     if (idCard) {
       payload = {
         ...payload,
-        idCard,
-      }
+        idCard
+      };
       method = "PUT";
     }
     const url = `${BASE_URL}/create`;
@@ -60,14 +59,7 @@ const functions = {
       if (json[0]._id) {
         return json[0];
       } else return false;
-  },
-  
+  }
 };
-function getRandomRgb() {
-  var num = Math.round(0xffffff * Math.random());
-  var r = num >> 16;
-  var g = (num >> 8) & 255;
-  var b = num & 255;
-  return "rgb(" + r + ", " + g + ", " + b + ")";
-}
+
 export default functions;
