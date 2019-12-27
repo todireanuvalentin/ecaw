@@ -9,7 +9,7 @@ const secret =
 router.post("/", (req, res, next) => {
   const { description, data, img } = req.body;
   let token = req.body.jwt;
-  if (!token) res.status(401).json({ message: "not autorized" });
+  if (!token) res.status(401).json({ message: "not authorized" });
 
   const userId = jwt.verify(token, secret)["id"];
   const idCard = new mongoose.Types.ObjectId();
@@ -35,6 +35,33 @@ router.post("/", (req, res, next) => {
           });
         });
     } else res.status(401).json({ message: "not autorized" });
+  });
+});
+
+router.put("/", (req, res, next) => {
+  let token = req.body.jwt;
+  let id = req.body.idCard;
+
+  jwt.verify(token, secret, function(error, decoded) {
+    if (error) {
+      res.status(401).json(error);
+    } else {
+      Card.findOne({ userId: decoded.id, _id: id }, function(err, foundObject) {
+        if (err) res.status(500).json(err);
+        else {
+          if (!foundObject) res.status(404).json({ error: "404" });
+          else {
+            foundObject.description = req.body.description;
+            foundObject.img = req.body.img;
+            foundObject.data = req.body.data;
+            foundObject.save(function(err, updatedObject) {
+              if (err) res.status(500).json(err);
+              else res.status(201).json(updatedObject);
+            });
+          }
+        }
+      });
+    }
   });
 });
 

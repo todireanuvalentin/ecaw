@@ -5,16 +5,19 @@ const Login = {
   render: () => {
     return `
     <div id="error-message">Username or password is incorrect! Please try again!</div>
-    <section class="login-section">
-      <label for="username">Username</label>
-      <input id="username" type="email" />
-      <label for="pass">Password</label>  
-      <input id="pass" type="password" />
-      <div class="action-section">
-        <button id="loginBtn" class="login-button">Log in</button>
-        <button id="goToRegisterBtn" class="register-button">Register</button>
-      </div>
-    </section>`;
+    <div class="login-page-wrapper dark-gradient">
+      <section class="login-section">
+        <label for="username">Username</label>
+        <input id="username" type="email" />
+        <label for="pass">Password</label>
+        <input id="pass" type="password" />
+        <div class="action-section">
+          <button id="loginBtn" class="login-button">Log in</button>
+          <button id="goToRegisterBtn" class="register-button">Register</button>
+        </div>
+      </section>
+    </div>
+    `;
   },
   registerEventHandlers: () => {
     document.getElementById("loginBtn").addEventListener("click", () => {

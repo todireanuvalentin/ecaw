@@ -1,14 +1,16 @@
 import Objects from "../../services/usualObjects.js";
 import functions from "../../services/objectFunctions.js";
 import HistoryComponent from "../components/HistoryComponent.js";
+import Utils from "./../../services/Utils.js";
+import { Request, BASE_URL } from "../../services/http.js";
 
 const create = {
   render: () => {
     const historySection = new HistoryComponent();
     return `
           <main class="create-card-page">
-            <section id="history-section" class="history-section">
-              <h2>Previous cards</h2>
+            <section id="history-section" class="history-section dark-gray">
+              <h2 class="section-header">Previous cards</h2>
               <div class="cards">
                 ${historySection.render()}
               </div>
@@ -18,8 +20,9 @@ const create = {
               <canvas id ="canvas"></canvas>
             </section>
 
-            <section class="toolbar-section">
-              <section class="toolbar-buttons">  
+            <section class="toolbar-section dark-gray">
+              <h2 class="section-header">Toolbar</h2>
+              <section class="toolbar-buttons">
                 <div class="toolbar-element">
                   <button id="newRect" type="button" class="toolbar-btn"> <i class="fa fa-square"></i> </button>
                   <button id="randomColor" type="button">Change color</button> 
@@ -44,7 +47,7 @@ const create = {
               
               <input type="range" min="0" max="1" step="0.01" value="0.5" class="slider" id="opacity">
               <button id="saveCard" type="button">Save</button>
-              <button id="clearCanvas" type="button">Clear</button>
+              <button id="clearCanvas" type="button">New card</button>
             </section>
           </main>
             `;
@@ -53,8 +56,17 @@ const create = {
     draw();
   }
 };
+
 function draw() {
   let canvas = new fabric.Canvas("canvas", { isDrawingMode: false });
+  let request = Utils.parseRequestURL();
+  if (request.id) {
+    const url = `${BASE_URL}/cards/${request.id}`;
+    Request("GET", url).then(card => {
+      canvas.loadFromJSON(card[0].data);
+    });
+  }
+
   let randomColor = document.getElementById("randomColor");
   let rectButton = document.getElementById("newRect");
   let opacitySlider = document.getElementById("opacity");
@@ -99,11 +111,12 @@ function draw() {
   });
 
   save.addEventListener("click", () => {
-    functions.save(canvas);
+    functions.save(canvas, request.id);
   });
 
   clear.addEventListener("click", () => {
     canvas.clear();
+    window.location.href = "#create"
   });
 }
 export default create;

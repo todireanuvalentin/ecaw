@@ -21,39 +21,22 @@ const functions = {
         canvas._activeObject._objects[i].set("opacity", opacity);
     canvas.renderAll();
   },
-  save: async (canvas, description) => {
-    const payload = {
+  save: (canvas, idCard = null) => {
+    let payload = {
       jwt: Utils.getCookie("jwt"),
       img: canvas.toDataURL("image/png"),
       data: JSON.stringify(canvas)
     };
-    const url = `${BASE_URL}/create`;
-    Request("POST", url, payload);
-  },
-  update: async (canvas, description, idCard) => {
-    var settings = {
-      method: "POST",
-      body: JSON.stringify({
-        jwt: Utils.getCookie("jwt"),
-        description: description,
-        idCard: idCard,
-        img: canvas.toDataURL("image/png"),
-        data: JSON.stringify(canvas)
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json"
-      }),
-      json: true
-    };
-
-    let response = await fetch("http://localhost:3000/update", settings);
-    let json = "";
-    if (response.ok) {
-      json = await response.json();
+    let method = "POST";
+    if (idCard) {
+      payload = {
+        ...payload,
+        idCard,
+      }
+      method = "PUT";
     }
-    if (json._id) window.location.hash = "#/card/" + json._id;
-    else console.log("error");
-    console.log(json);
+    const url = `${BASE_URL}/create`;
+    Request(method, url, payload).then(response => console.log(response));
   },
   isOwner: (token, idCard) => {
     var settings = {

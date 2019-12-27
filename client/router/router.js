@@ -12,7 +12,15 @@ class Router {
     window.addEventListener("hashchange", () => {
       let { hash } = this.location;
       if (!hash.length) hash = "#";
-      const route = this.routerConfig.filter(item => item.path === hash)[0];
+      const route = this.routerConfig.filter(item => {
+        if (hash.indexOf('/') > -1) {
+          const splitHash = hash.split('/');
+          const param = splitHash[1];
+          const baseRoute = splitHash[0];
+          return item.path === baseRoute;
+        }
+        return item.path === hash;
+      })[0];
       if (!route) return null;
       this.renderRoute(route);
     });

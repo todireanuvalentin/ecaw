@@ -10,7 +10,6 @@ const postRegister = require('./routes/register/post.js')
 const postCard = require('./routes/card/createCard.js');
 const getCard = require('./routes/card/getCard.js');
 const isOwner = require('./routes/card/isOwner.js');
-const update = require('./routes/card/update.js');
 const app = express();
 
 app.use(cors());
@@ -26,7 +25,6 @@ app.use('/verify', getLogin);
 app.use('/create', postCard);
 app.use('/cards', getCard);
 app.use('/isOwner', isOwner);
-app.use('/update', update);
 
 mongoose 
   .connect(

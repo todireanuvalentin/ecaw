@@ -14,5 +14,5 @@ export default [
   {
     path: "#register",
     component: Register
-  },
+  }
 ];

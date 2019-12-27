@@ -5,15 +5,18 @@ const Register = {
     return `
       <div id="error-message">Something went wrong. Please try again!</div>
       <div id="server-error-message">Username already exists</div>
-      <section class="register-section">
-        <label for="username">Username</label>
-        <input id="username" type="email" required />
-        <label for="password">Password</label>
-        <input id="password" type="password" required />
-        <label for="rpassword">Password</label>
-        <input id="rpassword" type="password" required />
-        <button type="submit" class="register-button" id="submit">Register</button>
-      </section> `;
+      <div class="login-page-wrapper dark-gradient">
+        <section class="register-section">
+          <label for="username">Username</label>
+          <input id="username" type="email" required />
+          <label for="password">Password</label>
+          <input id="password" type="password" required />
+          <label for="rpassword">Password</label>
+          <input id="rpassword" type="password" required />
+          <button type="submit" class="register-button" id="submit">Register</button>
+        </section>
+      </div>
+      `;
   },
   registerEventHandlers: () => {
     document.getElementById("submit").addEventListener("click", () => {
