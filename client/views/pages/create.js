@@ -73,7 +73,15 @@ function onSelectImage(canvas, container) {
 
       Utils.toDataURL(id).then(dataUrl => {
         fabric.Image.fromURL(dataUrl, function(img) {
-          var oImg = img.set({ left: 0, top: 0 }).scale(0.25);
+          var oImg = img
+            .set({
+              left: 0,
+              top: 0,
+              cornerColor: "black",
+              cornerSize: 3,
+              transparentCorners: false
+            })
+            .scale(0.25);
           canvas.add(oImg);
         });
       });

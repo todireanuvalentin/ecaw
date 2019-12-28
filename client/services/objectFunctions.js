@@ -36,29 +36,6 @@ const functions = {
     }
     const url = `${BASE_URL}/create`;
     Request(method, url, payload).then(response => console.log(response));
-  },
-  isOwner: (token, idCard) => {
-    var settings = {
-      method: "POST",
-      body: JSON.stringify({
-        jwt: token,
-        id: idCard
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json"
-      }),
-      json: true
-    };
-
-    let response = fetch("http://localhost:3000/isOwner", settings);
-    let json = "";
-    if (response.ok) {
-      json = response.json();
-    }
-    if (json)
-      if (json[0]._id) {
-        return json[0];
-      } else return false;
   }
 };
 
