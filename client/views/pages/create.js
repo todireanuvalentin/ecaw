@@ -10,6 +10,7 @@ const create = {
     return `
           <main class="create-card-page">
             <div id="error-message">Card not found</div>
+            <div id="copy-message">Link copied to clipboard</div>
             <section id="history-section" class="history-section dark-gray">
               <h2 class="section-header">Previous cards</h2>
               <div class="cards">
@@ -53,8 +54,11 @@ const create = {
                 <div id="imagesSection"></div>
               </section>
               
-              <button id="saveCard" type="button">Save</button>
-              <button id="clearCanvas" type="button">New card</button>
+              <section class="action-section">
+                <button id="saveCard" class="dark-gray" type="button">Save</button>
+                <button id="clearCanvas" class="dark-gray" type="button">New card</button>
+                <button id="generateId" class="dark-gray" type="button" style="display: none">Share</button>
+              </section>
             </section>
           </main>
             `;
@@ -116,6 +120,8 @@ function draw() {
   let canvas = new fabric.Canvas("canvas", { isDrawingMode: false });
   let request = Utils.parseRequestURL();
   if (request.id) {
+    let generateId = document.getElementById("generateId");
+    generateId.style.display = "inline";
     const url = `${BASE_URL}/cards/${request.id}`;
     const payload = { jwt: Utils.getCookie("jwt") };
     Request("POST", url, payload).then(card => {
@@ -138,6 +144,7 @@ function draw() {
   let lineButton = document.getElementById("newLine");
   let save = document.getElementById("saveCard");
   let clear = document.getElementById("clearCanvas");
+  let generateId = document.getElementById("generateId");
 
   rectButton.addEventListener("click", () => {
     canvas.add(Objects.rectangle());
@@ -184,5 +191,15 @@ function draw() {
     canvas.clear();
     window.location.href = "#create";
   });
+
+  generateId.addEventListener("click", () => {
+    navigator.clipboard.writeText(`http://localhost:5500/#view/${request.id}`);
+    const loginSection = document.getElementById("copy-message");
+        loginSection.className = "show";
+        setTimeout(() => {
+          loginSection.className = loginSection.className.replace("show", "");
+        }, 3000);
+        return false;
+  })
 }
 export default create;

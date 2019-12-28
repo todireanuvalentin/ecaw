@@ -122,7 +122,8 @@ button:focus {
 }
 
 #error-message,
-#server-error-message {
+#server-error-message,
+#copy-message {
   visibility: hidden;
   margin: 0 auto !important;
   background-color: #e57373;
@@ -139,8 +140,13 @@ button:focus {
   transform: translateX(-50%);
 }
 
+#copy-message {
+  background-color: #00796B;
+}
+
 #error-message.show,
-#server-error-message.show {
+#server-error-message.show,
+#copy-message.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -356,7 +362,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .search-section button:hover {
-  color: #d84315;
+  color: #00796B;
 }
 
 #imagesSection {
@@ -364,6 +370,31 @@ input[type="number"]::-webkit-outer-spin-button {
   overflow: auto;
 }
 
+/* ---------------- action section ------------------ */
+
+.action-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-section button {
+  border: 1px solid #00796B;
+  font-size: 16px;
+  background-color: transparent;
+  padding: 12px;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-section button:hover {
+  background-color: #00796B;
+  transition: 0.3s ease-in-out;
+  border: none;
+  opacity: 0.8;
+  color: #fff
+}
 /* ----------------- view page -------------------- */
 
 .view-section {
