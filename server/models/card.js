@@ -6,8 +6,8 @@ const CardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String
+  date: {
+    type: Date
   },
   data: {
     type: String,

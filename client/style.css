@@ -296,7 +296,7 @@ button:focus {
   padding: 8px;
 }
 
-.create-card-page .toolbar-section .toolbar-buttons .toolbar-btn:hover  {
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-btn:hover {
   background-color: #fff;
   transition: 0.3s ease-in-out;
   border: none;
@@ -308,7 +308,7 @@ button:focus {
   color: #fff;
 }
 
-.create-card-page .toolbar-section .toolbar-buttons .toolbar-btn:hover > .fa{
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-btn:hover > .fa {
   color: #000;
 }
 
@@ -356,10 +356,23 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .search-section button:hover {
-  color: #D84315
+  color: #d84315;
 }
 
 #imagesSection {
   height: 25vh;
   overflow: auto;
+}
+
+/* ----------------- view page -------------------- */
+
+.view-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.view-section .card-img {
+  width: 50%;
 }

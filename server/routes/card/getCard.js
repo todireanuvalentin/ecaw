@@ -18,9 +18,29 @@ router.get("/:id", (req, res, next) => {
     })
     .catch(err => {
       res.status(404).json({
-        error: "card not founded"
+        error: "card not found"
       });
     });
+});
+
+router.post("/:id", (req, res, next) => {
+  let id = req.params.id;
+  let token = req.body.jwt;
+  jwt.verify(token, secret, function(err, decoded) {
+    if (err) return res.status(401).json({ error: "Not authorized" });
+    Card.find({
+      _id: id,
+      userId: decoded.id
+    })
+      .then(document => {
+        res.json(document);
+      })
+      .catch(err => {
+        res.status(404).json({
+          error: "card not found"
+        });
+      });
+  });
 });
 
 router.post("/", (req, res, next) => {
@@ -35,7 +55,7 @@ router.post("/", (req, res, next) => {
             error: "Can not save card"
           })
         );
-    } else res.status(404).json({ error: "The session has expired" });
+    } else res.status(401).json({ error: "The session has expired" });
   });
 });
 

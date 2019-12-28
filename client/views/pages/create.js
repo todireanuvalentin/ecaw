@@ -9,6 +9,7 @@ const create = {
     const historySection = new HistoryComponent();
     return `
           <main class="create-card-page">
+            <div id="error-message">Card not found</div>
             <section id="history-section" class="history-section dark-gray">
               <h2 class="section-header">Previous cards</h2>
               <div class="cards">
@@ -68,12 +69,14 @@ function onSelectImage(canvas, container) {
 
   Array.from(cardElements).map(card => {
     card.addEventListener("click", event => {
-      const { id } = event.target.dataset; 
-      fabric.Image.fromURL(id, function(img) {
-        var oImg = img.set({ left: 0, top: 0 }).scale(0.25);
-        canvas.add(oImg);
+      const { id } = event.target.dataset;
+
+      Utils.toDataURL(id).then(dataUrl => {
+        fabric.Image.fromURL(dataUrl, function(img) {
+          var oImg = img.set({ left: 0, top: 0 }).scale(0.25);
+          canvas.add(oImg);
+        });
       });
-      return id;
     });
   });
 }
@@ -90,7 +93,7 @@ function searchImage(canvas) {
           <ul>
             ${images.hits.map(
               image => `<li data-id="${image.largeImageURL}">
-              <img  class="search-card-image" src="${image.largeImageURL}">
+              <img class="search-card-image" src="${image.largeImageURL}">
             </li>`
             )}
           </ul>
@@ -106,7 +109,16 @@ function draw() {
   let request = Utils.parseRequestURL();
   if (request.id) {
     const url = `${BASE_URL}/cards/${request.id}`;
-    Request("GET", url).then(card => {
+    const payload = { jwt: Utils.getCookie("jwt") };
+    Request("POST", url, payload).then(card => {
+      if (card.length === 0) {
+        const loginSection = document.getElementById("error-message");
+        loginSection.className = "show";
+        setTimeout(() => {
+          loginSection.className = loginSection.className.replace("show", "");
+        }, 3000);
+        return false;
+      }
       canvas.loadFromJSON(card[0].data);
     });
   }
