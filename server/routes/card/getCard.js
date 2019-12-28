@@ -49,6 +49,7 @@ router.post("/", (req, res, next) => {
   jwt.verify(token, secret, function(err, decoded) {
     if (!err) {
       Card.find({ userId: decoded.id })
+        .sort({ date: -1 })
         .then(document => res.json(document))
         .catch(_err =>
           res.status(404).json({

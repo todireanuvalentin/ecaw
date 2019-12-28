@@ -7,7 +7,7 @@ const secret =
   "7306a2b35da8e825c4b9e16177be028c44183c01f67a9c6a5b80844376f0425b02b6bc0d62087963513a4355fcb1a539e6dac0e1d4eb8969e62805bf522a783b";
 
 router.post("/", (req, res, next) => {
-  const { description, data, img } = req.body;
+  const { data, img } = req.body;
   let token = req.body.jwt;
   if (!token) res.status(401).json({ message: "not authorized" });
 
@@ -16,7 +16,7 @@ router.post("/", (req, res, next) => {
   const card = new Card({
     _id: idCard,
     userId,
-    description,
+    date: new Date(),
     data,
     img
   });
@@ -51,7 +51,7 @@ router.put("/", (req, res, next) => {
         else {
           if (!foundObject) res.status(404).json({ error: "404" });
           else {
-            foundObject.description = req.body.description;
+            foundObject.date = new Date();
             foundObject.img = req.body.img;
             foundObject.data = req.body.data;
             foundObject.save(function(err, updatedObject) {
