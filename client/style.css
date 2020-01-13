@@ -277,8 +277,8 @@ button:focus {
 }
 
 .create-card-page .canvas-section .canvas-container canvas {
-  width: 100% !important;
-  height: 100% !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 .create-card-page .toolbar-section {

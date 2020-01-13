@@ -34,7 +34,7 @@ const create = {
                   <button id="newCircle" type="button" class="toolbar-btn"> <i class="fa fa-circle"></i> </button>
                 </div>
                 <div class="toolbar-element">
-                  <button id="newCircleText" type="button" class="toolbar-btn"> <i class="fa fa-text-height"></i> </button>
+                  <button id="newText" type="button" class="toolbar-btn"> <i class="fa fa-text-height"></i> </button>
                 </div>
                 <div class="toolbar-element">
                   <button id="newDrawLine" type="button" class="toolbar-btn"> <i class="fa fa-edit"></i></button>
@@ -44,7 +44,8 @@ const create = {
                   <input id="lineWidth" type="number" min="1" max="100">
                   </div>
                 <div class="toolbar-element">
-                  <button id="newLine" type="button" class="toolbar-btn"> <i class="fa fa-edit"></i></button>
+                  <button id="newLine" type="button" class="toolbar-btn"> <i class="fa  fa-long-arrow-right"></i></button>
+                  <button id="delete" type="button" class="toolbar-btn"> <i class="fa fa-trash"></i></button>
                 </div>               
               </section>
 
@@ -117,7 +118,8 @@ function searchImage(canvas) {
 }
 
 function draw() {
-  let canvas = new fabric.Canvas("canvas", { isDrawingMode: false });
+  let canvas = new fabric.Canvas("canvas", { isDrawingMode: false,height:550,width:978 });
+  
   let request = Utils.parseRequestURL();
   if (request.id) {
     let generateId = document.getElementById("generateId");
@@ -141,7 +143,9 @@ function draw() {
 
   let rectButton = document.getElementById("newRect");
   let drawButton = document.getElementById("newDrawLine");
+  let newText = document.getElementById("newText");
   let lineButton = document.getElementById("newLine");
+  let deleteButton = document.getElementById("delete");
   let save = document.getElementById("saveCard");
   let clear = document.getElementById("clearCanvas");
   let generateId = document.getElementById("generateId");
@@ -185,11 +189,34 @@ function draw() {
 
   save.addEventListener("click", () => {
     functions.save(canvas, request.id);
+    window.location.href = "#create/";
+
+  });
+  newText.addEventListener("click", () => {
+    canvas.add(Objects.text());
+
   });
 
   clear.addEventListener("click", () => {
     canvas.clear();
     window.location.href = "#create";
+  });
+  deleteButton.addEventListener("click", () => {
+    var selection = canvas.getActiveObject();
+    console.log(selection);
+    //console.log(selection);
+    if (selection.type === 'activeSelection') {
+      selection.forEachObject(function(element) {
+          //console.log(element);
+          canvas.remove(element);
+      });
+  }
+  else{
+      canvas.remove(selection);
+  }
+  canvas.discardActiveObject();
+  canvas.requestRenderAll();
+
   });
 
   generateId.addEventListener("click", () => {
