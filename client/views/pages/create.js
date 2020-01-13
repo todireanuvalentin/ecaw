@@ -173,7 +173,7 @@ function onSelectImage(canvas, container) {
               left: 0,
               top: 0,
               cornerColor: "black",
-              cornerSize: 3,
+              cornerSize: 24,
               transparentCorners: false
             })
             .scale(0.25);
