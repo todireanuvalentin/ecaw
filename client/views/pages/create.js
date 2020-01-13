@@ -78,6 +78,86 @@ const create = {
     draw();
   }
 };
+
+
+fabric.Canvas.prototype.initialize = (function(originalFn) {
+  return function(...args) {
+    originalFn.call(this, ...args);
+    this._historyInit();
+    return this;
+  };
+})(fabric.Canvas.prototype.initialize);
+
+fabric.Canvas.prototype.dispose = (function(originalFn) {
+  return function(...args) {
+    originalFn.call(this, ...args);
+    this._historyDispose();
+    return this;
+  };
+})(fabric.Canvas.prototype.dispose);
+fabric.Canvas.prototype._historyNext = function () {
+  return JSON.stringify(this.toDatalessJSON(this.extraProps));
+}
+fabric.Canvas.prototype._historyEvents = function() {
+  return {
+    "object:added": this._historySaveAction,
+    "object:removed": this._historySaveAction,
+    "object:modified": this._historySaveAction,
+    "object:skewing": this._historySaveAction
+  }
+}
+
+fabric.Canvas.prototype._historyInit = function () {
+  this.historyUndo = [];
+  this.historyRedo = [];
+  this.historyNextState = this._historyNext();
+  
+  this.on(this._historyEvents());
+}
+fabric.Canvas.prototype._historyDispose = function () {
+  this.off(this._historyEvents())
+}
+fabric.Canvas.prototype._historySaveAction = function () {
+
+  if (this.historyProcessing)
+    return;
+
+  const json = this.historyNextState;
+  this.historyUndo.push(json);
+  this.historyNextState = this._historyNext();
+  this.fire('history:append', { json: json });
+}
+fabric.Canvas.prototype.undo = function () {
+  this.historyProcessing = true;
+
+  const history = this.historyUndo.pop();
+  if (history) {
+    this.historyRedo.push(this._historyNext());
+
+    this.loadFromJSON(history).renderAll();
+    this.fire('history:undo');
+  }
+
+  this.historyProcessing = false;
+}
+fabric.Canvas.prototype.redo = function () {
+
+  this.historyProcessing = true;
+  const history = this.historyRedo.pop();
+  if (history) {
+    this.historyUndo.push(this._historyNext());
+    
+    this.loadFromJSON(history).renderAll();
+    this.fire('history:redo');
+  }
+
+  this.historyProcessing = false;
+}
+fabric.Canvas.prototype.clearHistory = function() {
+  this.historyUndo = [];
+  this.historyRedo = [];
+  this.fire('history:clear');
+}
 let _clipboard =0;
 function onSelectImage(canvas, container) {
   const cardElements = container.querySelectorAll("li");
@@ -158,6 +238,7 @@ function Paste(canvas) {
 function draw() {
   
   let canvas = new fabric.Canvas("canvas", { isDrawingMode: false });
+  canvas._historyInit();
   let containerSize = {
     width: document.getElementById('canvas-container').offsetWidth,
     height: document.getElementById('canvas-container').offsetHeight
@@ -241,7 +322,11 @@ function draw() {
         Paste(canvas);
     } else if ( key == 67 && ctrl ) {
         Copy(canvas);
-    }
+    } else if ( key ==90 && ctrl){
+        canvas.undo();
+    }else if ( key ==88 && ctrl){
+      canvas.redo();
+  }
 
 },false);
 
