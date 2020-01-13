@@ -5,7 +5,7 @@ const Objects = {
       width: 200,
       height: 200,
       cornerColor: "black",
-      cornerSize: 3,
+      cornerSize: 24,
       transparentCorners: false
     }),
   line: () =>
@@ -13,12 +13,13 @@ const Objects = {
       stroke: "black",
       cornerColor: "black",
       width: 20,
-      cornerSize: 3,
+      cornerSize: 24,
       transparentCorners: false
     }),  
-  text: ()=>new fabric.Textbox('Lorum ipsum dolor sit amet', {
+  text: (addText,tcolor)=>new fabric.Textbox(addText, {
     left: 50,
     top: 50,
+    fill:tcolor,
     width: 150,
     fontSize: 20
   }),
@@ -27,7 +28,7 @@ const Objects = {
       radius: 30,
       fill: "#f55",
       cornerColor: "black",
-      cornerSize: 3,
+      cornerSize: 24,
       transparentCorners: false
     })
 };

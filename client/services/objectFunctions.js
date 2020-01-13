@@ -12,7 +12,7 @@ const functions = {
     canvas.renderAll();
   },
   opacity: (canvas, opacity) => {
-    if (!canvas.getActiveObject()) console.log("selecteaza ceva bos");
+    if (!canvas.getActiveObject()) console.log("Select something");
     else if (canvas.getActiveObject().type !== "activeSelection")
       canvas._activeObject.set("opacity", opacity);
     else

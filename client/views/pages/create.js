@@ -18,24 +18,31 @@ const create = {
               </div>
             </section>
 
-            <section class="canvas-section">
+            <section id="canvas-container" class="canvas-section">
               <canvas id ="canvas"></canvas>
             </section>
 
             <section class="toolbar-section dark-gray">
               <h2 class="section-header">Toolbar</h2>
               <section class="toolbar-buttons">
+              <div class="toolbar-element">
+              <label for="changeColors">Change Color </label>
+                  <input id="changeColors" type="color" name="color" class="color-input"> 
+
+              </div>
                 <div class="toolbar-element">
                   <button id="newRect" type="button" class="toolbar-btn"> <i class="fa fa-square"></i> </button>
-                  <label for="rectColor">Color </label>
-                  <input id="rectColor" type="color" name="color" class="color-input">  
-                </div> 
-                <div class="toolbar-element">
+                  <button id="newLine" type="button" class="toolbar-btn"> <i class="fa  fa-long-arrow-right"></i></button>
                   <button id="newCircle" type="button" class="toolbar-btn"> <i class="fa fa-circle"></i> </button>
+                  </div> 
+                <div class="toolbar-element">
+                  
                 </div>
                 <div class="toolbar-element">
-                  <button id="newText" type="button" class="toolbar-btn"> <i class="fa fa-text-height"></i> </button>
-                </div>
+                  <input id="addText" type="text" placeholder="add text here">
+                  <button id="newText" type="button" class="toolbar-btn"> <i class="fa fa-plus"></i> </button>
+                  <input id="textColor" type="color" name="color" class="color-input">  
+                  </div>
                 <div class="toolbar-element">
                   <button id="newDrawLine" type="button" class="toolbar-btn"> <i class="fa fa-edit"></i></button>
                   <label for="drawColor">Color </label>
@@ -44,8 +51,11 @@ const create = {
                   <input id="lineWidth" type="number" min="1" max="100">
                   </div>
                 <div class="toolbar-element">
-                  <button id="newLine" type="button" class="toolbar-btn"> <i class="fa  fa-long-arrow-right"></i></button>
+                  
                   <button id="delete" type="button" class="toolbar-btn"> <i class="fa fa-trash"></i></button>
+                  
+                  <input type="file" name="imageUpload" id="addImage" style="display:none"/> 
+                   <label for="addImage" class="button-style">Your image <i class="fa fa-picture-o" aria-hidden="true"></i></label>
                 </div>               
               </section>
 
@@ -68,7 +78,7 @@ const create = {
     draw();
   }
 };
-
+let _clipboard =0;
 function onSelectImage(canvas, container) {
   const cardElements = container.querySelectorAll("li");
 
@@ -116,10 +126,45 @@ function searchImage(canvas) {
     });
   });
 }
+function Copy(canvas) {
+	canvas.getActiveObject().clone(function(cloned) {
+		_clipboard = cloned;
+	});
+}
 
+function Paste(canvas) {
+	_clipboard.clone(function(clonedObj) {
+		canvas.discardActiveObject();
+		clonedObj.set({
+			left: clonedObj.left + 10,
+			top: clonedObj.top + 10,
+			evented: true,
+		});
+		if (clonedObj.type === 'activeSelection') {
+			clonedObj.canvas = canvas;
+			clonedObj.forEachObject(function(obj) {
+				canvas.add(obj);
+			});
+			clonedObj.setCoords();
+		} else {
+			canvas.add(clonedObj);
+		}
+		_clipboard.top += 10;
+		_clipboard.left += 10;
+		canvas.setActiveObject(clonedObj);
+		canvas.requestRenderAll();
+	});
+}
 function draw() {
-  let canvas = new fabric.Canvas("canvas", { isDrawingMode: false,height:550,width:978 });
   
+  let canvas = new fabric.Canvas("canvas", { isDrawingMode: false });
+  let containerSize = {
+    width: document.getElementById('canvas-container').offsetWidth,
+    height: document.getElementById('canvas-container').offsetHeight
+ };
+ 
+ canvas.setWidth(containerSize.width);
+ canvas.setHeight(containerSize.height);
   let request = Utils.parseRequestURL();
   if (request.id) {
     let generateId = document.getElementById("generateId");
@@ -152,15 +197,54 @@ function draw() {
 
   rectButton.addEventListener("click", () => {
     canvas.add(Objects.rectangle());
-    const color = document.getElementById("rectColor");
+  });
+  const color = document.getElementById("changeColors");
     color.addEventListener("input", () =>
       functions.changeColor(canvas, color.value)
     );
-  });
 
   newCircle.addEventListener("click", () => {
     canvas.add(Objects.circle());
   });
+ document.getElementById("addImage").addEventListener('change', function() {
+    if (this.files && this.files[0]) {
+      var file=this.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        console.log(reader.result)
+        fabric.Image.fromURL(reader.result, function(img) {
+          var oImg = img
+            .set({
+              left: 0,
+              top: 0,
+              cornerColor: "black",
+              cornerSize: 24,
+              transparentCorners: false
+            })
+            .scale(0.25);
+          canvas.add(oImg);
+        })
+     
+      }
+      
+      reader.readAsDataURL(file);
+
+    }
+
+  });
+  document.body.addEventListener("keydown",function(e){
+    e = e || window.event;
+    var key = e.which || e.keyCode; // keyCode detection
+    var ctrl = e.ctrlKey ? e.ctrlKey : ((key === 17) ? true : false); // ctrl detection
+
+    if ( key == 86 && ctrl ) {
+        Paste(canvas);
+    } else if ( key == 67 && ctrl ) {
+        Copy(canvas);
+    }
+
+},false);
+
 
   drawButton.addEventListener("click", () => {
     const color = document.getElementById("drawColor");
@@ -193,7 +277,9 @@ function draw() {
 
   });
   newText.addEventListener("click", () => {
-    canvas.add(Objects.text());
+    let addText = document.getElementById("addText").value;
+    let color = document.getElementById("textColor").value;
+    canvas.add(Objects.text(addText,color));
 
   });
 
