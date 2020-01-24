@@ -11,7 +11,7 @@ const Login = {
         <input id="username" type="email" />
         <label for="pass">Password</label>
         <input id="pass" type="password" />
-        <div class="action-section">
+        <div class="action-login-section">
           <button id="loginBtn" class="login-button">Log in</button>
           <button id="goToRegisterBtn" class="register-button">Register</button>
         </div>

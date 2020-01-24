@@ -73,6 +73,12 @@ body {
   margin-bottom: 16px;
 }
 
+.text-section .text-input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+}
+
 .login-section button,
 .register-section button {
   font-size: 16px;
@@ -112,9 +118,10 @@ body {
   border: 1px solid #ffa000;
 }
 
-.login-section .action-section {
+.login-section .action-login-section {
   display: flex;
   justify-content: space-between;
+  width: auto;
 }
 
 button:focus {
@@ -141,7 +148,7 @@ button:focus {
 }
 
 #copy-message {
-  background-color: #00796B;
+  background-color: #00796b;
 }
 
 #error-message.show,
@@ -267,6 +274,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .create-card-page .canvas-section .canvas-container {
@@ -287,7 +295,7 @@ button:focus {
 }
 
 .create-card-page .toolbar-buttons .toolbar-element {
-  margin: 24px 0;
+  margin: 8px 0 0 0;
   display: flex;
   align-items: center;
 }
@@ -318,15 +326,65 @@ button:focus {
   color: #000;
 }
 
-.create-card-page
-  .toolbar-section
-  .toolbar-buttons
-  .toolbar-element
-  .color-input {
+.color-input {
   width: 25px;
   height: 25px;
   border: none;
+  margin-right: 4px;
   background-color: #fff;
+}
+
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-element.shapes,
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-element.draw,
+.create-card-page .toolbar-section .toolbar-buttons .text-section.text,
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-element.actions,
+.section .toolbar-element.image {
+  flex-wrap: wrap;
+  padding: 4px;
+}
+
+.section {
+  border: 1px solid #424242;
+  padding: 4px;
+}
+
+.toolbar-element.section,
+.text-section.text.section {
+  margin: 8px 0 0 0;
+}
+
+.section:hover {
+  flex-wrap: wrap;
+  background-color: #424242;
+  padding: 4px;
+}
+
+.create-card-page
+  .toolbar-section
+  .toolbar-buttons
+  .toolbar-element.shapes
+  > h5,
+.create-card-page
+  .toolbar-section
+  .toolbar-buttons
+  .toolbar-element.actions
+  > h5,
+.create-card-page .toolbar-section .toolbar-buttons .toolbar-element.draw > h5 {
+  flex-basis: 100%;
+  margin: 0;
+  color: #fff;
+}
+
+.create-card-page .toolbar-section .toolbar-buttons .text-section.text > h5 {
+  flex-basis: 100%;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.section .toolbar-element.image > h5 {
+  color: #fff;
+  flex-basis: 100%;
+  margin: 0 0 10px;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -334,12 +392,12 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#addText{
+.text-input {
   padding: 12px;
-    border: 1px solid #ccc;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    width: 100%;
+  border: 1px solid #ccc;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  width: 100%;
 }
 .toolbar-element label {
   color: #fff;
@@ -348,27 +406,48 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* ---------------- search section ---------------- */
 
-.search-section {
+.search-section,
+.text-section {
   padding: 4px 0;
   position: relative;
 }
 
-.search-section input {
+.search-section input,
+.text-section .text-input {
   border-radius: 4px;
   width: 100%;
 }
 
-.search-section button {
+.search-section button,
+.text-section button,
+.text-section .color-input {
   position: absolute;
-  right: 10px;
-  top: 15px;
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
+.search-section button {
+  right: 10px;
+  top: 15px;
+}
 
-.search-section button:hover {
-  color: #00796B;
+.text-section .color-input {
+  top: 40px;
+  right: 36px;
+}
+
+.text-section button {
+  right: 10px;
+  top: 44px;
+}
+
+.text-section button .fa {
+  color: #000;
+}
+
+.search-section button:hover,
+.text-section button:hover {
+  color: #00796b;
 }
 
 #imagesSection {
@@ -381,12 +460,13 @@ input[type="number"]::-webkit-outer-spin-button {
 .action-section {
   display: flex;
   justify-content: space-between;
+  width: 300px;
 }
 
 .action-section button {
-  border: 1px solid #00796B;
+  border: 2px solid #00796b;
   font-size: 16px;
-  background-color: transparent;
+  background-color: #00796b;
   padding: 12px;
   color: #fff;
   transition: 0.3s ease-in-out;
@@ -395,11 +475,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .action-section button:hover {
-  background-color: #00796B;
+  background-color: transparent;
   transition: 0.3s ease-in-out;
   border: none;
   opacity: 0.8;
-  color: #fff
+  color: #fff;
+  border: 2px solid #00796b;
 }
 /* ----------------- view page -------------------- */
 
@@ -412,4 +493,5 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .view-section .card-img {
   width: 50%;
+  background-color: #fff;
 }

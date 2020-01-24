@@ -35,7 +35,7 @@ const functions = {
       method = "PUT";
     }
     const url = `${BASE_URL}/create`;
-    Request(method, url, payload).then(response => console.log(response));
+    return Request(method, url, payload).then(response => console.log(response));
   }
 };
 
