@@ -11,7 +11,7 @@ const Register = {
           <input id="username" type="email" required />
           <label for="password">Password</label>
           <input id="password" type="password" required />
-          <label for="rpassword">Password</label>
+          <label for="rpassword">Repeat password</label>
           <input id="rpassword" type="password" required />
           <button type="submit" class="register-button" id="submit">Register</button>
         </section>

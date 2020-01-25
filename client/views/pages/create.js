@@ -189,7 +189,7 @@ function onSelectImage(canvas, container) {
 function searchImage(canvas) {
   document.getElementById("searchButton").addEventListener("click", () => {
     const searchContent = document.getElementById("search").value;
-    const url = `${BASE_URL}/images `;
+    const url = `${BASE_URL}/image `;
     const payload = { searchContent };
 
     Request("POST", url, payload).then(images => {
@@ -250,17 +250,19 @@ function draw() {
   let request = Utils.parseRequestURL();
   if (request.id) {
     let generateId = document.getElementById("generateId");
-    generateId.style.display = "inline";
-    const url = `${BASE_URL}/cards/${request.id}`;
+    const url = `${BASE_URL}/card/${request.id}`;
     const payload = { jwt: Utils.getCookie("jwt") };
     Request("POST", url, payload).then(card => {
       if (card.length === 0) {
         const loginSection = document.getElementById("error-message");
         loginSection.className = "show";
+
         setTimeout(() => {
           loginSection.className = loginSection.className.replace("show", "");
         }, 3000);
         return false;
+      } else {
+        generateId.style.display = "inline";
       }
       canvas.loadFromJSON(card[0].data);
     });
@@ -314,8 +316,8 @@ function draw() {
     "keydown",
     function(e) {
       e = e || window.event;
-      var key = e.which || e.keyCode; 
-      var ctrl = e.ctrlKey ? e.ctrlKey : key === 17 ? true : false; 
+      var key = e.which || e.keyCode;
+      var ctrl = e.ctrlKey ? e.ctrlKey : key === 17 ? true : false;
 
       if (key == 86 && ctrl) {
         Paste(canvas);

@@ -495,3 +495,10 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 50%;
   background-color: #fff;
 }
+
+@media screen and (max-width: 640px) {
+  .view-section .card-img {
+    width: 100%;
+    background-color: #fff;
+  }
+}

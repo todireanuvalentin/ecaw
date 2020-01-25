@@ -9,7 +9,6 @@ const getLogin = require("./routes/login/verify.js");
 const postRegister = require("./routes/register/post.js");
 const postCard = require("./routes/card/createCard.js");
 const getCard = require("./routes/card/getCard.js");
-const isOwner = require("./routes/card/isOwner.js");
 const getImages = require("./routes/card/search.js");
 const app = express();
 
@@ -23,9 +22,8 @@ app.use("/register", postRegister);
 app.use("/login", postLogin);
 app.use("/verify", getLogin);
 app.use("/create", postCard);
-app.use("/cards", getCard);
-app.use("/isOwner", isOwner);
-app.use("/images", getImages);
+app.use("/card", getCard);
+app.use("/image", getImages);
 
 mongoose
   .connect(

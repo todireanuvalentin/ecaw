@@ -41,6 +41,7 @@ router.post("/", (req, res, next) => {
 router.put("/", (req, res, next) => {
   let token = req.body.jwt;
   let id = req.body.idCard;
+  const { img, data } = req.body;
 
   jwt.verify(token, secret, function(error, decoded) {
     if (error) {
@@ -52,8 +53,8 @@ router.put("/", (req, res, next) => {
           if (!foundObject) res.status(404).json({ error: "404" });
           else {
             foundObject.date = new Date();
-            foundObject.img = req.body.img;
-            foundObject.data = req.body.data;
+            foundObject.img = img;
+            foundObject.data = data;
             foundObject.save(function(err, updatedObject) {
               if (err) res.status(500).json(err);
               else res.status(201).json(updatedObject);

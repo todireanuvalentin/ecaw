@@ -8,7 +8,7 @@ const ViewCard = {
   registerEventHandlers: () => {
     let request = Utils.parseRequestURL();
     if (request.id) {
-      const url = `${BASE_URL}/cards/${request.id}`;
+      const url = `${BASE_URL}/card/${request.id}`;
 
       Request("GET", url).then(cards => {
         const container = document.querySelector("#view-section");

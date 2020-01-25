@@ -17,7 +17,7 @@ export default class HistoryComponent {
 
   getCards() {
     const payload = { jwt: Utils.getCookie("jwt") };
-    const url = `${BASE_URL}/cards`;
+    const url = `${BASE_URL}/card`;
     
     Request("POST", url, payload).then(cards => {
       const container = document.querySelector("#history-section .cards");
