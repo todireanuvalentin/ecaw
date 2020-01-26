@@ -56,7 +56,7 @@
           digitala a unor ilustrate de diverse categorii si impartasirea
           acestora cu cei dragi. Aplicatia este una de tip SPA, deoarece toate
           codurile necesare - HTML , JavaScript și CSS - sunt preluate cu o
-          singură pagină de încărcare.
+          singură încărcare.
         </p>
       </section>
       <section typeof="sa:MaterialsAndMethods" id="tehnologii">
@@ -116,7 +116,7 @@
         <h3>1. Login</h3>
         <p>
           Formularul de <strong>LOGIN</strong> se afla pe prima pagina a
-          aplicatie pe ruta <i>http://BASE_URL/#login</i>. Utilizatorul
+          aplicatiei pe ruta <i>http://BASE_URL/#login</i>. Utilizatorul
           introduce datele personale: <strong>username-ul</strong> si
           <strong>parola</strong> iar apoi daca datele sunt introduse corect va
           fi redirectionat catre pagina principala a aplicatiei.
@@ -128,20 +128,17 @@
         <p>
           Din punct de vedere al implementarii, username-ul si parola sunt
           trimise catre Server in body. Backend-ul proceseaza datele, cauta in
-          baza de date in tabela <strong>USERS</strong> unsername-ul si parola
-          primite din body. Parola fiind criptata cu
-          <a href="npmjs.com/package/bcrypt">Bcrypt</a>, se va compara daca
-          parola din body corespunde cu parola decriptata aflata in baza de
-          date.
+          baza de date in tabela <strong>USERS</strong> username-ul si parola
+          primite din body. Parola este criptata cu
+          <a href="npmjs.com/package/bcrypt">Bcrypt</a>.
         </p>
         <p>
-          Daca in urma verificarii, datele corespund, utilizatorul va fi trimis
-          carte pagina principala a aplicatiei, iar serverul va trimite
-          <strong>jwt</strong> pe care clientul il va salva in cookie din motive
-          de securitate, pentru a nu putea fi accesat de orice script aflat in
-          pagina; altfel conectarea va esua iar el va fi instiintat printr-un
-          mesaj in partea de sus a paginii. Pe partea de backend, serverul va
-          trimite un status code si un mesaj descrise in functie de caz in
+          Daca in urma verificarii datele corespund, utilizatorul va fi trimis
+          catre pagina principala a aplicatiei, iar serverul va trimite un
+          <strong>token JWT</strong> pe care clientul il va salva in cookie;
+          altfel conectarea va esua iar el va fi instiintat printr-un mesaj in
+          partea de sus a paginii. Pe partea de backend, serverul va trimite un
+          status code si un mesaj descrise in functie de caz in
           <a
             href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
           >
@@ -169,9 +166,9 @@
         </figure>
         <p>
           Utilizatorul va introduce username-ul dorit iar mai apoi va trebui sa
-          introduca parola de doua ori iar apoi va apasa butonul "Register". In
-          cazul in care parolele introduse nu sunt identince, utilizatorul va fi
-          instiintat cu un mesaj de eorare.
+          introduca parola de doua ori dupa care va apasa butonul
+          <strong>Register</strong>. In cazul in care parolele introduse nu sunt
+          identice, utilizatorul va fi instiintat cu un mesaj de eroare.
         </p>
         <figure typeof="sa:Image">
           <img src="images/wrong-password.PNG" alt="Register wrong password" />
@@ -186,7 +183,7 @@
           parola cu ajutorul pachetului
           <a href="npmjs.com/package/bcrypt">Bcrypt</a>, iar mai apoi va salva
           datele in tabela <strong>USERS</strong>. Pentru register se vor
-          implementa detaliile regasite in secriunea Users, ruta
+          implementa detaliile regasite in sectiunea Users, ruta
           "/user/register".
         </p>
         <p>
@@ -201,9 +198,9 @@
           aparea in partea de sus a paginii. De exemplu pentru cazul in care
           username-ul se afla deja in baza de date, Server-ul va trimite catre
           Client status code-ul 409 impreuna cu mesajul: "Username already
-          exists". Iar Clientul va afisa mesajul "Username already exists"
-          pentru ca Utilizatorul sa fie instiintat de ce nu s-a finalizat cu
-          succes inregistrarea.
+          exists". Clientul va afisa mesajul "Username already exists" pentru ca
+          Utilizatorul sa fie instiintat de ce nu s-a finalizat cu succes
+          inregistrarea.
         </p>
         <figure typeof="sa:Image">
           <img
@@ -226,9 +223,9 @@
             </li>
             <li>
               <strong>Modul edit</strong> - cand utilizatorul se afla pe ruta
-              <i>http://BASE_URL/#create/:id</i>, continutul canvasului cel al
-              cardului selectat din partea din stanga a paginii iar pe langa
-              cele doua butoane enumerate mai sus, mai apare un al treilea
+              <i>http://BASE_URL/#create/:id</i>, continutul canvasului este cel
+              al cardului selectat din partea din stanga a paginii. Pe langa
+              cele doua butoane mentionate mai sus, mai apare un al treilea:
               <strong>Share</strong>.
             </li>
           </ul>
@@ -255,25 +252,22 @@
             </li>
             <li>
               <strong>Sectiunea cardului</strong> - aflata pe centrul paginii,
-              este locul destinat cardului care va fi editat, iar sub card se
-              regasesc butoanele destinate actiunilor.
+              este locul destinat cardului care va fi editat sau creat, sub card
+              regasindu-se butoanele destinate actiunilor.
             </li>
             <li>
-              <strong>Panoul cu toolbar</strong> - unde se alfa instrumentele cu
+              <strong>Panoul cu toolbar</strong> - unde se afla instrumentele cu
               care utilizatorul poate edita cardul.
             </li>
           </ul>
         </div>
 
         <div>
-          <h4>
-            3.3 Detalii de implementare:
-          </h4>
           <div>
-            <h4>3.3.1 Previous cards</h4>
+            <h4>3.2.1 Previous cards</h4>
             <p>
-              Sectiune Previous cards sunt randate cardurile deja creeate care
-              apartin fiecarui utilizator.
+              In sectiunea <strong>Previous cards</strong> sunt randate
+              cardurile deja create care apartin fiecarui utilizator.
             </p>
             <p>
               <strong>Clientul</strong> afiseaza cate un card pentru fiecare
@@ -289,14 +283,13 @@
             </p>
             <p>
               <strong>Serverul</strong> va trimite catre client toate cardurile
-              in oridine descrescatoare pentru care jwt-ul primit corespunde cu
-              cel din baza de date.
+              care corespund cu id-ul user-ului curent, in ordine
+              descrescatoare.
             </p>
 
             <p>
               Cand <strong>Utilizatorul</strong> selecteaza un card, se va randa
-              in sectiunea de canvas cardul selectat doar daca acesta ii
-              apartine.
+              in sectiunea de canvas cardul selectat.
             </p>
             <p>
               <strong>Clientul</strong> trimite prin metoda
@@ -311,13 +304,11 @@
 
             <p>
               <strong>Server-ul</strong> receptioneaza metoda si verifica daca
-              jwt-ul aflat in body este acelasi cu cel din baza de date si cauta
-              in baza de date id-ul elementului care corespunde cu id-ul trimis
-              in body. Astfel, Utilizatorul va putea accesa doar cardurule
-              proprii pentru editare, nu si cardurile celorlalti utilizatori.
-              Daca totusi utilizatorul incearca sa acceseze atl card, punand in
-              url id-ul altui card, avesta va fii instiintat print-un mesaj de
-              eroare ca nu il poate accesa.
+              utilizatorul are dreptul de a accesa cardul. Astfel, Utilizatorul
+              va putea accesa doar cardurile proprii pentru editare, nu si
+              cardurile celorlalti utilizatori. Daca totusi utilizatorul
+              incearca sa acceseze alt card, punand in url id-ul altui card,
+              acesta va fi instiintat printr-un mesaj de eroare.
             </p>
             <figure typeof="sa:Image">
               <img src="images/card-not-found.PNG" alt="Card not found" />
@@ -327,12 +318,12 @@
         </div>
 
         <div>
-          <h4>3.3.2 Toolbar</h4>
+          <h4>3.2.2 Toolbar</h4>
           <div>
             <strong>Elements</strong>
             <p>
               Sectiunea elements contine elemente geometrice care pot fi
-              adaugate in canvas. Pentru fiecare dintre acestea folosit butoane,
+              adaugate in canvas. Pentru fiecare dintre acestea s-au folosit butoane,
               care prin apasarea lor cu ajutorul urmatoarele clase din
               biblioteca
               <i>Fabric.js</i> s-au randat elementele in canvas:
@@ -343,7 +334,7 @@
               <li>Circle</li>
             </ul>
             <p>
-              Acestea isi pot schimba culoare apasand pe input-color-ul aflat
+              Acestea isi pot schimba culoarea apasand pe input-color-ul aflat
               dedesubt sau pot fi sterse apasand pe butonul dedicat acestei
               actiuni. Pentru ambele actiuni este necesar ca un element sa fie
               selectat. Din biblioteca Fabric.js folosim metodele:
@@ -369,14 +360,14 @@
             acest lucru este nevoie sa setam initial <i>Canvasul</i> in modul
             <i>isDrawingMode: false</i>. Ca si celelalte elemente, pentru a
             trece in modul de desenare, s-a folosit un buton. La apasarea lui va
-            ramane selectat, acest lucru ne indica faptul ca acum
+            ramane selectat, acest lucru indicandu-ne faptul ca acum
             <i>Canvasul</i> este in modul de editare. La nivel de implementare,
             se seteaza proprietatea <i>isDrawingMode: true</i>.
           </p>
           <p>
             Pentru customizarea modului de desenare, se foloseste input-color-ul
             pentru selectarea imaginii. Cu ajutorul bibliotecii Fabric.js se
-            seteaza proporietatea <i>canvas.freeDrawingBrush.color</i> cu
+            seteaza proprietatea <i>canvas.freeDrawingBrush.color</i> cu
             culoarea selectata din input-color. Pentru dimensiunea liniei, se
             seteaza proprietatea <i>canvas.freeDrawingBrush.width</i> cu
             dimensiunea introdusa in inputul width.
@@ -389,8 +380,8 @@
             Acest element este reprezentat printr-un input in care se introduce
             textul dorit de Utilizator. In partea din dreapta a inputului se
             regaseste un buton pentru schimbarea culorii (un input-color) si un
-            buton reprezentat printr-un <strong>+</strong> care la apasarea lui
-            adauga testul in sectiunea de <i>Canvas</i>.
+            buton reprezentat printr-un <strong>+</strong> care 
+            adauga textul in sectiunea de <i>Canvas</i>.
           </p>
           <p>
             Acest lucru este posibil cu ajutorul bibliotecii Fabric.js, din care
@@ -407,7 +398,7 @@
             este de a cauta imagini in sectiunea <strong>Search</strong>.
           </p>
           <p>
-            <strong>Upload-ul</strong> de imagine este TO DO: Goerge adaugat
+            <strong>Upload-ul</strong> de imagine este TO DO: George adaugat
             detalii
           </p>
           <p>
@@ -420,7 +411,7 @@
             Din motive intemeiate (pentru evitarea unei erori de tipul CORS)
             API-ul se va apela de catre <strong>Server</strong>. Astfel
             <strong>Clientul</strong> trimite prin metoda <strong>POST</strong>,
-            pe ruta "http://BASE_URL/#image", body-ul care contine continutul
+            pe ruta "http://BASE_URL/image", body-ul care contine continutul
             dupa care se doreste sa se faca cautarea.
           </p>
           <p>
@@ -429,23 +420,22 @@
             specificat, avand nevoie de o cheie generata de acesta. Astfel
             URL-ul apelat va fi
             <i>https://pixabay.com/api/?key=${API_KEY}&q=${searchContent}</i>.
-            In cele din urma, API-ul va raspunde cu informatiile dorite pe care
+            In cele din urma, API-ul va raspunde cu informatiile dorite (in format JSON) pe care
             le trimite catre <strong>Client</strong>.
           </p>
         </div>
 
         <div>
-          <h4>3.3.3 Card</h4>
+          <h4>3.2.3 Card</h4>
           <p>
             In sectiunea Card se regasesete board-ul in care se creeaza cardul
-            iar mai jos butoanele destinate salvarii / update-arii, shear-uirii
-            si inceperea unui nou card.
+            iar mai jos butoanele de save, new card si share.
           </p>
-          <p><strong>3.3.3.1 Save</strong></p>
+          <p><strong>3.2.3.1 Save</strong></p>
           <p>
             In cazul in care Utilizatorul se afla in modul de creare, butonul
-            save este destinat salvarii in baza de date ale unei noi entitati.
-            Pentru aceasta actiune cand Utilizatorul apasa pe butonul
+            save este destinat salvarii in baza de date a unei noi entitati.
+            Pentru aceasta actiune, cand Utilizatorul apasa pe butonul
             <strong>SAVE</strong>, <strong>Clientul</strong> trimite prin metoda
             <strong>POST</strong>, pe ruta <i>"http://BASE_URL/create"</i>,
             payload-ul care contine jwt-ul, userId, date, data, img (descris in
@@ -463,13 +453,13 @@
           <p>
             Cand Utilizatorul este in modul de editare, butonul
             <strong>Save</strong> este destinat update-arii unui card specific.
-            Prin apasarea lui, trimtie prin metoda <strong>PUT</strong>, pe ruta
+            Prin apasarea lui, trimite prin metoda <strong>PUT</strong>, pe ruta
             <i>"http://BASE_URL/create"</i> body-ul care contine jwt-ul, id-ul
             cardului, img, data.
           </p>
           <p>
-            <strong>Server-ul</strong> primeste daele si cauta in baza de date
-            dupa id-ul cardului, pentru care id-ul utilizatorului este acelasi
+            <strong>Server-ul</strong> primeste datele si cauta in baza de date
+            dupa id-ul cardului, pentru care id-ul utilizatorului este acelasi cu
             cel primit. Daca se gaseste elementul cu informatiile primite,
             <strong>Server-ul</strong> va updata campurile <i>img</i>,
             <i>data</i> cu cele primite in body, iar <i>date</i> cu data
@@ -481,7 +471,7 @@
             >.
           </p>
 
-          <p><strong>3.3.3.2 Share</strong></p>
+          <p><strong>3.2.3.2 Share</strong></p>
           <p>
             Acest buton va fi vizibil doar pentru modul de editare. Prin
             apasarea lui se va crea un nou link si se copiaza in clipboard, pe
@@ -493,10 +483,10 @@
             <figcaption>Fig. 10 - Share card</figcaption>
           </figure>
 
-          <p><strong>3.3.3.3 New Card</strong></p>
+          <p><strong>3.2.3.3 New Card</strong></p>
           <p>
             Acest buton este folosit pentru ca utilizatorul sa creeze un nou
-            card. In cazul in care el este in modul de ediatre, prin apasarea
+            card. In cazul in care el este in modul de editare, prin apasarea
             lui va fi redirectionat catre ruta
             <i>"http://BASE_URL/#create"</i> unde continutul canvas-ului va fi
             gol. Acest lucru este posibil cu ajutorul bibliotecii Fabric.js,
@@ -510,7 +500,7 @@
             Aceasta pagina se afla pe ruta <i>"http://BASE_URL/#view/:id"</i> si
             este destinata vizualizarii cardurilor share-uite. Aceasta pagina
             este de asemenea responsive, pentru ca imaginea sa poata fi
-            vizualizat si pe mobile.
+            vizualizata si pe mobile.
           </p>
           <figure typeof="sa:Image">
             <img src="images/view-responsive.PNG" alt="Responsive view page" />
@@ -521,8 +511,8 @@
             primi imaginea cardului prin metoda <strong>GET</strong>, apelata pe
             ruta <i>http://BASE_URL/card/${view-section}</i>.
             <strong>Server-ul</strong> va cauta in tabela
-            <strong>Card</strong> elementrul care are id-ul egal cu cel primit
-            ca parametru, si va trimite sub forma de json raspunsul catre
+            <strong>Card</strong> elementul care are id-ul egal cu cel primit
+            ca parametru, si va trimite sub forma de JSON raspunsul catre
             <strong>Client</strong>. Alte detalii se pot regasi in
             <a
               href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
@@ -550,9 +540,9 @@
         </li>
         <li>style.css - fisierul destinat stilizarii</li>
         <li>
-          router - care resprezinta folderul in care se va gasi fisierele js in
+          router - care reprezinta folderul in care se vor gasi fisierele js in
           care se implementeaza intreaga routare a aplicatiei. In functie de
-          denumirea din path se va randa componentele specifice
+          denumirea din path se vor randa componentele specifice
         </li>
         <li>
           service - folderul care contine toate fisierele cu elementele utile
@@ -561,7 +551,7 @@
           views
           <ul>
             <li>
-              compoenents - care contine clasele reutilizabile alea aplicatiei
+              components - care contine clasele reutilizabile ale aplicatiei
             </li>
             <li>pages - structura paginilor</li>
           </ul>
@@ -573,7 +563,7 @@
         <li>app.js</li>
         <li>package.json</li>
         <li>
-          models - folder care contine fisiere care contin schemele din tabelele
+          models - folder care contine fisierele pentru definirea schemelor din tabelele
           din baza de date
         </li>
         <li>
