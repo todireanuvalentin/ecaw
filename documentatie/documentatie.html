@@ -1,710 +1,695 @@
 <!DOCTYPE html>
 <html lang="ro">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="keywords"
-      content="project, infoiasi, web, photos, videos, media"
-    />
-    <link rel="shortcut icon" type="image/png" href="imagini/favicon.png" />
-    <title>Documentatie-ECAW</title>
-    <link rel="stylesheet" href="scholarly.css" />
-    <link rel="stylesheet" href="prism-coy.css" />
-    <script src="node_modules/prismjs/prism.js" defer></script>
-  </head>
 
-  <body
-    prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/"
-  >
-    <header>
-      <p class="title">ECAW</p>
-      <p class="subtitle">ECAW</p>
-    </header>
-    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
-      <h1>ECAW</h1>
-      <section>
-        <h2 style="display: none">Section</h2>
-        <ol>
-          <li property="schema:author" typeof="sa:ContributorRole">
-            <a property="schema:author" href="#" typeof="schema:Person">
-              <span property="schema:givenName">Valentin George</span>
-              <span property="schema:familyName">Todireanu</span>
-            </a>
-          </li>
-          <li property="schema:author" typeof="sa:ContributorRole">
-            <a property="schema:author" href="#" typeof="schema:Person">
-              <span property="schema:givenName">Maria-Alexandra</span>
-              <span property="schema:familyName">Purice</span>
-            </a>
-          </li>
-        </ol>
-      </section>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="keywords" content="project, infoiasi, web, photos, videos, media" />
+  <link rel="shortcut icon" type="image/png" href="imagini/favicon.png" />
+  <title>Documentatie-ECAW</title>
+  <link rel="stylesheet" href="scholarly.css" />
+  <link rel="stylesheet" href="prism-coy.css" />
+  <script src="node_modules/prismjs/prism.js" defer></script>
+</head>
 
-      <section typeof="sa:Abstract" id="abstract">
-        <h2>Abstract</h2>
-        <p>
-          În conținutul lucrarii se regasesc urmatoarele: Introducere,
-          Tehnologii utilizate, Arhitectura aplicatiei, Etapele de dezvoltare,
-          Concluzie, Bibliografie.
-        </p>
-      </section>
-      <section typeof="sa:Introducere" id="intro">
-        <h2>Introducere</h2>
-        <p>
-          <strong>ECAW</strong> este o aplicatie web extensibila pentru crearea
-          digitala a unor ilustrate de diverse categorii si impartasirea
-          acestora cu cei dragi. Aplicatia este una de tip SPA, deoarece toate
-          codurile necesare - HTML , JavaScript și CSS - sunt preluate cu o
-          singură încărcare.
-        </p>
-      </section>
-      <section typeof="sa:MaterialsAndMethods" id="tehnologii">
-        <h2>Tehnologii</h2>
-        <h3>HTML</h3>
-        <p>
-          HyperText Markup Language (HTML) este un limbaj de marcare utilizat
-          pentru crearea paginilor web ce pot fi afișate într-un browser (sau
-          navigator). Va fi folosit in cadrul scheletului principal al
-          proiectului.
-        </p>
-        <h3>CSS</h3>
-        <p>
-          CSS (Cascading Style Sheets) este un standard pentru formatarea
-          elementelor unui document HTML. Stilurile se pot atașa elementelor
-          HTML prin intermediul unor fișiere externe sau în cadrul documentului.
-          CSS se poate utiliza și pentru formatarea
-          elementelor XHTML, XML și SVGL. Intregul design al aplicatiei va fi
-          realizat si formatat prin intermediul CSS.
-        </p>
-        <h3>Javascript</h3>
-        <p>
-          JavaScript (JS) este un limbaj de programare orientat obiect bazat pe
-          conceptul prototipurilor. Este folosit mai ales pentru introducerea
-          unor funcționalități în paginile web, codul Javascript din aceste
-          pagini fiind rulat de către browser.
-        </p>
-        <h3>Node.js</h3>
-        <p>
-          Node.js este o platformă de dezvoltare a surselor deschise pentru
-          executarea codului JavaScript din partea serverului. Node este util
-          pentru dezvoltarea aplicațiilor care necesită o conexiune persistentă
-          de la browser la server și este adesea utilizat pentru aplicații în
-          timp real, cum ar fi chat-uri, fluxuri de știri și notificări push
-          web.
-        </p>
-        <h3>GitHub</h3>
-        <p>
-          Reprezintă un sistem de control al versiunilor codului sursă care va
-          fi folosit pentru o mai bună administrare cât și pentru lucrul în
-          echipa.
-        </p>
-        <h3>MongoDb</h3>
-        <p>
-          Reprezintă o bază de date NoSQL orientată către documente, folosită
-          pentru stocarea datelor cu volum mare. Se încadrează în categoria
-          bazelor de date de tip NoSQL.
-        </p>
-      </section>
-      <section typeof="sa:MaterialsAndMethods" id="arhitectura">
-        <h2>Arhitectura aplicației</h2>
-        <p>
-          Utilizând tehnologiile menționate în secțiunea anterioară, aplicația
-          va fi structurată în mai multe module, după cum urmează:
-        </p>
-
-        <h3>1. Login</h3>
-        <p>
-          Formularul de <strong>LOGIN</strong> se afla pe prima pagina a
-          aplicatiei pe ruta <i>http://BASE_URL/#login</i>. Utilizatorul
-          introduce datele personale: <strong>username-ul</strong> si
-          <strong>parola</strong> iar apoi daca datele sunt introduse corect va
-          fi redirectionat catre pagina principala a aplicatiei.
-        </p>
-        <figure typeof="sa:Image">
-          <img src="images/login.PNG" alt="Login page" />
-          <figcaption>Fig. 1 - Login page</figcaption>
-        </figure>
-        <p>
-          Din punct de vedere al implementarii, username-ul si parola sunt
-          trimise catre Server in body. Backend-ul proceseaza datele, cauta in
-          baza de date in tabela <strong>USERS</strong> username-ul si parola
-          primite din body. Parola este criptata cu
-          <a href="npmjs.com/package/bcrypt">Bcrypt</a>.
-        </p>
-        <p>
-          Daca in urma verificarii datele corespund, utilizatorul va fi trimis
-          catre pagina principala a aplicatiei, iar serverul va trimite un
-          <strong>token JWT</strong> pe care clientul il va salva in cookie;
-          altfel conectarea va esua iar el va fi instiintat printr-un mesaj in
-          partea de sus a paginii. Pe partea de backend, serverul va trimite un
-          status code si un mesaj descrise in functie de caz in
-          <a
-            href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-          >
-            Swagger-ul
-          </a>
-          atasat. Pentru login se vor implementa detaliile regasite in sectiunea
-          Users, ruta "/user/login"
-        </p>
-        <figure typeof="sa:Image">
-          <img
-            src="images/login-error-message.PNG"
-            alt="Login page with error"
-          />
-          <figcaption>Fig. 2 - Login page with error</figcaption>
-        </figure>
-        <h3>2. Register</h3>
-        <p>
-          Formularul de <strong>REGISTER</strong> se afla la ruta
-          <i>http://BASE_URL/#register</i> si poate fi accesat prin apasarea
-          butonului <strong>Register</strong> aflat in formularul de "Login".
-        </p>
-        <figure typeof="sa:Image">
-          <img src="images/register.PNG" alt="Registerpage" />
-          <figcaption>Fig. 3 - Register page</figcaption>
-        </figure>
-        <p>
-          Utilizatorul va introduce username-ul dorit iar mai apoi va trebui sa
-          introduca parola de doua ori dupa care va apasa butonul
-          <strong>Register</strong>. In cazul in care parolele introduse nu sunt
-          identice, utilizatorul va fi instiintat cu un mesaj de eroare.
-        </p>
-        <figure typeof="sa:Image">
-          <img src="images/wrong-password.PNG" alt="Register wrong password" />
-          <figcaption>Fig. 4 - Register wrong password</figcaption>
-        </figure>
-        <p>
-          In cazul in care datele introduse sunt corecte, Utilizatorul va fi
-          redirectionat catre pagina principala a aplicatiei.
-        </p>
-        <p>
-          Server-ul va receptiona prin body datele utilizatorului, criptand
-          parola cu ajutorul pachetului
-          <a href="npmjs.com/package/bcrypt">Bcrypt</a>, iar mai apoi va salva
-          datele in tabela <strong>USERS</strong>. Pentru register se vor
-          implementa detaliile regasite in sectiunea Users, ruta
-          "/user/register".
-        </p>
-        <p>
-          Pentru cazurile de eroare, serverul va trimite status cod-urile
-          descrise in
-          <a
-            href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-          >
-            Swagger-ul
-          </a>
-          atasat, iar Utilizatorul va fi instiintat printr-un mesaj care va
-          aparea in partea de sus a paginii. De exemplu pentru cazul in care
-          username-ul se afla deja in baza de date, Server-ul va trimite catre
-          Client status code-ul 409 impreuna cu mesajul: "Username already
-          exists". Clientul va afisa mesajul "Username already exists" pentru ca
-          Utilizatorul sa fie instiintat de ce nu s-a finalizat cu succes
-          inregistrarea.
-        </p>
-        <figure typeof="sa:Image">
-          <img
-            src="images/register-already-exists.PNG"
-            alt="Register user already exists"
-          />
-          <figcaption>Fig. 5 - Register user already exists</figcaption>
-        </figure>
-        <h3>3. Pagina principală</h3>
-        <div>
-          <h4>
-            3.1 Pagina principala se poate regasi in doua moduri:
-          </h4>
-          <ul>
-            <li>
-              <strong>Modul create</strong> - cand utilizatorul se afla pe ruta
-              <i>http://BASE_URL/#create</i>, continutul canvasului este gol si
-              se pot vedea doar doua butoane <strong>Save</strong> si
-              <strong>New card</strong>.
-            </li>
-            <li>
-              <strong>Modul edit</strong> - cand utilizatorul se afla pe ruta
-              <i>http://BASE_URL/#create/:id</i>, continutul canvasului este cel
-              al cardului selectat din partea din stanga a paginii. Pe langa
-              cele doua butoane mentionate mai sus, mai apare un al treilea:
-              <strong>Share</strong>.
-            </li>
-          </ul>
-        </div>
-
-        <figure typeof="sa:Image">
-          <img src="images/home-page.PNG" alt="Home page create mode" />
-          <figcaption>Fig. 6 - Home page create mode</figcaption>
-        </figure>
-
-        <figure typeof="sa:Image">
-          <img src="images/home-page-edit-mode.PNG" alt="Home page edit mode" />
-          <figcaption>Fig. 7 - Home page edit mode</figcaption>
-        </figure>
-
-        <div>
-          <h4>
-            3.2 Pagina principala se imparte in trei sectiuni:
-          </h4>
-          <ul>
-            <li>
-              <strong>Previous cards</strong> - unde se regasesc toate cardurile
-              user-ului pe care le-a salvat in trecut.
-            </li>
-            <li>
-              <strong>Sectiunea cardului</strong> - aflata pe centrul paginii,
-              este locul destinat cardului care va fi editat sau creat, sub card
-              regasindu-se butoanele destinate actiunilor.
-            </li>
-            <li>
-              <strong>Panoul cu toolbar</strong> - unde se afla instrumentele cu
-              care utilizatorul poate edita cardul.
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <div>
-            <h4>3.2.1 Previous cards</h4>
-            <p>
-              In sectiunea <strong>Previous cards</strong> sunt randate
-              cardurile deja create care apartin fiecarui utilizator.
-            </p>
-            <p>
-              <strong>Clientul</strong> afiseaza cate un card pentru fiecare
-              element alfat in baza de date <strong>CARDS</strong>. Cu ajutorul
-              metodei <strong>POST</strong> el trimite in payload jwt-ul salvat
-              in cookie, pe ruta <i>"${BASE_URL}/card"</i> destinata serverului.
-              Pentru mai multe detalii a se vedea in
-              <a
-                href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-              >
-                Swagger </a
-              >.
-            </p>
-            <p>
-              <strong>Serverul</strong> va trimite catre client toate cardurile
-              care corespund cu id-ul user-ului curent, in ordine
-              descrescatoare.
-            </p>
-
-            <p>
-              Cand <strong>Utilizatorul</strong> selecteaza un card, se va randa
-              in sectiunea de canvas cardul selectat.
-            </p>
-            <p>
-              <strong>Clientul</strong> trimite prin metoda
-              <strong>POST</strong> pe ruta
-              <i>"${BASE_URL}/card/:id"</i> body-ul care contine id-ul cardului
-              si jwt-ul utilizatorului.
-            </p>
-            <figure typeof="sa:Image">
-              <img src="images/edit-card.PNG" alt="Card selected" />
-              <figcaption>Fig. 8 - Card selected</figcaption>
-            </figure>
-
-            <p>
-              <strong>Server-ul</strong> receptioneaza metoda si verifica daca
-              utilizatorul are dreptul de a accesa cardul. Astfel, Utilizatorul
-              va putea accesa doar cardurile proprii pentru editare, nu si
-              cardurile celorlalti utilizatori. Daca totusi utilizatorul
-              incearca sa acceseze alt card, punand in url id-ul altui card,
-              acesta va fi instiintat printr-un mesaj de eroare.
-            </p>
-            <figure typeof="sa:Image">
-              <img src="images/card-not-found.PNG" alt="Card not found" />
-              <figcaption>Fig. 9 - Card not found</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div>
-          <h4>3.2.2 Toolbar</h4>
-          <div>
-            <strong>Elements</strong>
-            <p>
-              Sectiunea elements contine elemente geometrice care pot fi
-              adaugate in canvas. Pentru fiecare dintre acestea s-au folosit butoane,
-              care prin apasarea lor cu ajutorul urmatoarele clase din
-              biblioteca
-              <i>Fabric.js</i> s-au randat elementele in canvas:
-            </p>
-            <ul>
-              <li>Rect</li>
-              <li>Line</li>
-              <li>Circle</li>
-            </ul>
-            <p>
-              Acestea isi pot schimba culoarea apasand pe input-color-ul aflat
-              dedesubt sau pot fi sterse apasand pe butonul dedicat acestei
-              actiuni. Pentru ambele actiuni este necesar ca un element sa fie
-              selectat. Din biblioteca Fabric.js folosim metodele:
-            </p>
-            <ul>
-              <li><i>getActiveObject()</i> - pentru a selecta un element</li>
-              <li>
-                <i>remove(element)</i> - pentru a sterge unul sau mai multe
-                elemente
-              </li>
-              <li>
-                <i>set("fill", color)</i> - pentru a schimba culoarea unui
-                element
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <h4>Draw</h4>
-          <p>
-            Acesta sectiune este destinata modului de desenare in canvas. Pentru
-            acest lucru este nevoie sa setam initial <i>Canvasul</i> in modul
-            <i>isDrawingMode: false</i>. Ca si celelalte elemente, pentru a
-            trece in modul de desenare, s-a folosit un buton. La apasarea lui va
-            ramane selectat, acest lucru indicandu-ne faptul ca acum
-            <i>Canvasul</i> este in modul de editare. La nivel de implementare,
-            se seteaza proprietatea <i>isDrawingMode: true</i>.
-          </p>
-          <p>
-            Pentru customizarea modului de desenare, se foloseste input-color-ul
-            pentru selectarea imaginii. Cu ajutorul bibliotecii Fabric.js se
-            seteaza proprietatea <i>canvas.freeDrawingBrush.color</i> cu
-            culoarea selectata din input-color. Pentru dimensiunea liniei, se
-            seteaza proprietatea <i>canvas.freeDrawingBrush.width</i> cu
-            dimensiunea introdusa in inputul width.
-          </p>
-        </div>
-
-        <div>
-          <h4>Text</h4>
-          <p>
-            Acest element este reprezentat printr-un input in care se introduce
-            textul dorit de Utilizator. In partea din dreapta a inputului se
-            regaseste un buton pentru schimbarea culorii (un input-color) si un
-            buton reprezentat printr-un <strong>+</strong> care 
-            adauga textul in sectiunea de <i>Canvas</i>.
-          </p>
-          <p>
-            Acest lucru este posibil cu ajutorul bibliotecii Fabric.js, din care
-            se foloseste clasa <i>TextBox</i> pentru adaugarea continutului in
-            <i>Canvas</i>.
-          </p>
-        </div>
-
-        <div>
-          <h4>Image</h4>
-          <p>
-            Utilizatorul poate adauga o imagine prin doua moduri. Primul mod
-            este adaugarea unei imagini din laptop-ul personal, cea dea doua
-            este de a cauta imagini in sectiunea <strong>Search</strong>.
-          </p>
-          <p>
-            <strong>Upload-ul</strong> de imagine este TO DO: George adaugat
-            detalii
-          </p>
-          <p>
-            Sectiunea <strong>Search</strong> este reprezentata printr-un input
-            in care se scrie continutul dorit si mai jos se vor randa
-            rezultatele gasite. Acest lucru este posibil cu ajutorul API-ului
-            extern <a href="https://pixabay.com">https://pixabay.com</a>.
-          </p>
-          <p>
-            Din motive intemeiate (pentru evitarea unei erori de tipul CORS)
-            API-ul se va apela de catre <strong>Server</strong>. Astfel
-            <strong>Clientul</strong> trimite prin metoda <strong>POST</strong>,
-            pe ruta "http://BASE_URL/image", body-ul care contine continutul
-            dupa care se doreste sa se faca cautarea.
-          </p>
-          <p>
-            <strong>Server-ul</strong> intercepteaza continutul si cu ajutorul
-            metodei https <strong>GET</strong> face un call catre API-ul
-            specificat, avand nevoie de o cheie generata de acesta. Astfel
-            URL-ul apelat va fi
-            <i>https://pixabay.com/api/?key=${API_KEY}&q=${searchContent}</i>.
-            In cele din urma, API-ul va raspunde cu informatiile dorite (in format JSON) pe care
-            le trimite catre <strong>Client</strong>.
-          </p>
-        </div>
-
-        <div>
-          <h4>3.2.3 Card</h4>
-          <p>
-            In sectiunea Card se regasesete board-ul in care se creeaza cardul
-            iar mai jos butoanele de save, new card si share.
-          </p>
-          <p><strong>3.2.3.1 Save</strong></p>
-          <p>
-            In cazul in care Utilizatorul se afla in modul de creare, butonul
-            save este destinat salvarii in baza de date a unei noi entitati.
-            Pentru aceasta actiune, cand Utilizatorul apasa pe butonul
-            <strong>SAVE</strong>, <strong>Clientul</strong> trimite prin metoda
-            <strong>POST</strong>, pe ruta <i>"http://BASE_URL/create"</i>,
-            payload-ul care contine jwt-ul, userId, date, data, img (descris in
-            <a
-              href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-            >
-              Swagger </a
-            >).
-          </p>
-          <p>
-            <strong>Server-ul</strong> primeste datele de la
-            <strong>Client</strong> si le salveaza in tabela
-            <strong>Card</strong>, generand un id unic.
-          </p>
-          <p>
-            Cand Utilizatorul este in modul de editare, butonul
-            <strong>Save</strong> este destinat update-arii unui card specific.
-            Prin apasarea lui, trimite prin metoda <strong>PUT</strong>, pe ruta
-            <i>"http://BASE_URL/create"</i> body-ul care contine jwt-ul, id-ul
-            cardului, img, data.
-          </p>
-          <p>
-            <strong>Server-ul</strong> primeste datele si cauta in baza de date
-            dupa id-ul cardului, pentru care id-ul utilizatorului este acelasi cu
-            cel primit. Daca se gaseste elementul cu informatiile primite,
-            <strong>Server-ul</strong> va updata campurile <i>img</i>,
-            <i>data</i> cu cele primite in body, iar <i>date</i> cu data
-            curenta. Pentru celelale cazuri se va urmari
-            <a
-              href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-            >
-              Swagger </a
-            >.
-          </p>
-
-          <p><strong>3.2.3.2 Share</strong></p>
-          <p>
-            Acest buton va fi vizibil doar pentru modul de editare. Prin
-            apasarea lui se va crea un nou link si se copiaza in clipboard, pe
-            care Utilizatorul il poate trimite oricui doreste.
-          </p>
-
-          <figure typeof="sa:Image">
-            <img src="images/link-meesage.PNG" alt="Share card" />
-            <figcaption>Fig. 10 - Share card</figcaption>
-          </figure>
-
-          <p><strong>3.2.3.3 New Card</strong></p>
-          <p>
-            Acest buton este folosit pentru ca utilizatorul sa creeze un nou
-            card. In cazul in care el este in modul de editare, prin apasarea
-            lui va fi redirectionat catre ruta
-            <i>"http://BASE_URL/#create"</i> unde continutul canvas-ului va fi
-            gol. Acest lucru este posibil cu ajutorul bibliotecii Fabric.js,
-            apeland metoda <i>clear()</i>.
-          </p>
-        </div>
-
-        <h3>4. Pagina de vizualizare</h3>
-        <div>
-          <p>
-            Aceasta pagina se afla pe ruta <i>"http://BASE_URL/#view/:id"</i> si
-            este destinata vizualizarii cardurilor share-uite. Aceasta pagina
-            este de asemenea responsive, pentru ca imaginea sa poata fi
-            vizualizata si pe mobile.
-          </p>
-          <figure typeof="sa:Image">
-            <img src="images/view-responsive.PNG" alt="Responsive view page" />
-            <figcaption>Fig. 11 - Responsive view page</figcaption>
-          </figure>
-          <p>
-            Din punct de vedere al implementarii, <strong>Clientul</strong> va
-            primi imaginea cardului prin metoda <strong>GET</strong>, apelata pe
-            ruta <i>http://BASE_URL/card/${view-section}</i>.
-            <strong>Server-ul</strong> va cauta in tabela
-            <strong>Card</strong> elementul care are id-ul egal cu cel primit
-            ca parametru, si va trimite sub forma de JSON raspunsul catre
-            <strong>Client</strong>. Alte detalii se pot regasi in
-            <a
-              href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/"
-            >
-              Swagger </a
-            >.
-          </p>
-          <figure typeof="sa:Image">
-            <img src="images/view-page.PNG" alt="View page" />
-            <figcaption>Fig. 12 - View page</figcaption>
-          </figure>
-        </div>
-
-        <p>TO DO: copy, paste, redo, undo</p>
-      </section>
-
-      <h2>Structura proiectului</h2>
-      <h3>Client</h3>
-      <p>Proiectul va avea contine:</p>
-      <ul>
-        <li>app.js - unde se va randa clasa Router</li>
-        <li>
-          index.html - unicul fisier html in care continutul se va incarca in
-          functie de fisierele js
-        </li>
-        <li>style.css - fisierul destinat stilizarii</li>
-        <li>
-          router - care reprezinta folderul in care se vor gasi fisierele js in
-          care se implementeaza intreaga routare a aplicatiei. In functie de
-          denumirea din path se vor randa componentele specifice
-        </li>
-        <li>
-          service - folderul care contine toate fisierele cu elementele utile
-        </li>
-        <li>
-          views
-          <ul>
-            <li>
-              components - care contine clasele reutilizabile ale aplicatiei
-            </li>
-            <li>pages - structura paginilor</li>
-          </ul>
-        </li>
-      </ul>
-      <h3>Server</h3>
-      <p>Structura proiectul va fi urmatoarea:</p>
-      <ul>
-        <li>app.js</li>
-        <li>package.json</li>
-        <li>
-          models - folder care contine fisierele pentru definirea schemelor din tabelele
-          din baza de date
-        </li>
-        <li>
-          routes
-          <ul>
-            <li>
-              card - folder in care se regasesc fisierle pentru operatiunile
-              destinate cardului (create, update, search)
-            </li>
-            <li>login - folder in care se regasesc fisierele pentru login</li>
-            <li>register - folder in care se regasesc fisierele pt registre</li>
-          </ul>
-        </li>
-      </ul>
-
-      <h2>Etape de dezvoltare</h2>
-      <h4>
-        Aplicația noastră web va fi dezvoltată în urmatoarele etape:
-      </h4>
-
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+  <header>
+    <p class="title">ECAW</p>
+    <p class="subtitle">ECAW</p>
+  </header>
+  <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+    <h1>ECAW</h1>
+    <section>
+      <h2 style="display: none">Section</h2>
       <ol>
-        <li>
-          Arhitectura aplicaţiei Web
-          <p>
-            Un raport în formatul Scholarly HTML care va include:
-          </p>
-          <ul>
-            <li>
-              informaţii privind etapele principale ale dezvoltării proiectului
-            </li>
-            <li>maniera de interacţiune cu utilizatorul</li>
-            <li>
-              modul de folosire a sistemului de management al codului-sursă ales
-            </li>
-            <li>detalii referitoare la modelarea datelor</li>
-            <li>
-              soluţiile de stocare disponibile la nivel de client şi/sau server
-            </li>
-          </ul>
+        <li property="schema:author" typeof="sa:ContributorRole">
+          <a property="schema:author" href="#" typeof="schema:Person">
+            <span property="schema:givenName">Valentin George</span>
+            <span property="schema:familyName">Todireanu</span>
+          </a>
         </li>
-
-        <li>
-          Soluţia completă
-          <ul>
-            <li>Soluţia complet funcţională a proiectului</li>
-            <li>
-              Ghidul de utilizare a aplicaţiei dezvoltate – disponibil ca
-              document Scholarly HTML –, oferind capturi-ecran şi un film
-              demonstrativ cu o durată de 4—7 minute, la calitate HD
-            </li>
-          </ul>
+        <li property="schema:author" typeof="sa:ContributorRole">
+          <a property="schema:author" href="#" typeof="schema:Person">
+            <span property="schema:givenName">Maria-Alexandra</span>
+            <span property="schema:familyName">Purice</span>
+          </a>
         </li>
       </ol>
-      <section>
-        <h2>Diagrama UML</h2>
-        <figure typeof="sa:Image">
-          <img src="images/UML.PNG" alt="Diagrama UML" />
+    </section>
 
-          <figcaption>Fig.13 - Diagrama UML</figcaption>
-        </figure>
-      </section>
-      <section>
-        <h2>Diagrama Use-Case</h2>
-        <figure typeof="sa:Image">
-          <img src="images/use-case.PNG" alt="Diagrama Use-Case" />
+    <section typeof="sa:Abstract" id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        În conținutul lucrarii se regasesc urmatoarele: Introducere,
+        Tehnologii utilizate, Arhitectura aplicatiei, Etapele de dezvoltare,
+        Concluzie, Bibliografie.
+      </p>
+    </section>
+    <section typeof="sa:Introducere" id="intro">
+      <h2>Introducere</h2>
+      <p>
+        <strong>ECAW</strong> este o aplicatie web extensibila pentru crearea
+        digitala a unor ilustrate de diverse categorii si impartasirea
+        acestora cu cei dragi. Aplicatia este una de tip SPA, deoarece toate
+        codurile necesare - HTML , JavaScript și CSS - sunt preluate cu o
+        singură încărcare.
+      </p>
+    </section>
+    <section typeof="sa:MaterialsAndMethods" id="tehnologii">
+      <h2>Tehnologii</h2>
+      <h3>HTML</h3>
+      <p>
+        HyperText Markup Language (HTML) este un limbaj de marcare utilizat
+        pentru crearea paginilor web ce pot fi afișate într-un browser (sau
+        navigator). Va fi folosit in cadrul scheletului principal al
+        proiectului.
+      </p>
+      <h3>CSS</h3>
+      <p>
+        CSS (Cascading Style Sheets) este un standard pentru formatarea
+        elementelor unui document HTML. Stilurile se pot atașa elementelor
+        HTML prin intermediul unor fișiere externe sau în cadrul documentului.
+        CSS se poate utiliza și pentru formatarea
+        elementelor XHTML, XML și SVGL. Intregul design al aplicatiei va fi
+        realizat si formatat prin intermediul CSS.
+      </p>
+      <h3>Javascript</h3>
+      <p>
+        JavaScript (JS) este un limbaj de programare orientat obiect bazat pe
+        conceptul prototipurilor. Este folosit mai ales pentru introducerea
+        unor funcționalități în paginile web, codul Javascript din aceste
+        pagini fiind rulat de către browser.
+      </p>
+      <h3>Node.js</h3>
+      <p>
+        Node.js este o platformă de dezvoltare a surselor deschise pentru
+        executarea codului JavaScript din partea serverului. Node este util
+        pentru dezvoltarea aplicațiilor care necesită o conexiune persistentă
+        de la browser la server și este adesea utilizat pentru aplicații în
+        timp real, cum ar fi chat-uri, fluxuri de știri și notificări push
+        web.
+      </p>
+      <h3>GitHub</h3>
+      <p>
+        Reprezintă un sistem de control al versiunilor codului sursă care va
+        fi folosit pentru o mai bună administrare cât și pentru lucrul în
+        echipa.
+      </p>
+      <h3>MongoDb</h3>
+      <p>
+        Reprezintă o bază de date NoSQL orientată către documente, folosită
+        pentru stocarea datelor cu volum mare. Se încadrează în categoria
+        bazelor de date de tip NoSQL.
+      </p>
+    </section>
+    <section typeof="sa:MaterialsAndMethods" id="arhitectura">
+      <h2>Arhitectura aplicației</h2>
+      <p>
+        Utilizând tehnologiile menționate în secțiunea anterioară, aplicația
+        va fi structurată în mai multe module, după cum urmează:
+      </p>
 
-          <figcaption>Fig. 14 - Diagrama Use-Case</figcaption>
-        </figure>
-      </section>
-      <section>
-        <h2>Diagrama Arhitecturala</h2>
+      <h3>1. Login</h3>
+      <p>
+        Formularul de <strong>LOGIN</strong> se afla pe prima pagina a
+        aplicatiei pe ruta <i>http://BASE_URL/#login</i>. Utilizatorul
+        introduce datele personale: <strong>username-ul</strong> si
+        <strong>parola</strong> iar apoi daca datele sunt introduse corect va
+        fi redirectionat catre pagina principala a aplicatiei.
+      </p>
+      <figure typeof="sa:Image">
+        <img src="images/login.PNG" alt="Login page" />
+        <figcaption>Fig. 1 - Login page</figcaption>
+      </figure>
+      <p>
+        Din punct de vedere al implementarii, username-ul si parola sunt
+        trimise catre Server in body. Backend-ul proceseaza datele, cauta in
+        baza de date in tabela <strong>USERS</strong> username-ul si parola
+        primite din body. Parola este criptata cu
+        <a href="npmjs.com/package/bcrypt">Bcrypt</a>.
+      </p>
+      <p>
+        Daca in urma verificarii datele corespund, utilizatorul va fi trimis
+        catre pagina principala a aplicatiei, iar serverul va trimite un
+        <strong>token JWT</strong> pe care clientul il va salva in cookie;
+        altfel conectarea va esua iar el va fi instiintat printr-un mesaj in
+        partea de sus a paginii. Pe partea de backend, serverul va trimite un
+        status code si un mesaj descrise in functie de caz in
+        <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+          Swagger-ul
+        </a>
+        atasat. Pentru login se vor implementa detaliile regasite in sectiunea
+        Users, ruta "/user/login"
+      </p>
+      <figure typeof="sa:Image">
+        <img src="images/login-error-message.PNG" alt="Login page with error" />
+        <figcaption>Fig. 2 - Login page with error</figcaption>
+      </figure>
+      <h3>2. Register</h3>
+      <p>
+        Formularul de <strong>REGISTER</strong> se afla la ruta
+        <i>http://BASE_URL/#register</i> si poate fi accesat prin apasarea
+        butonului <strong>Register</strong> aflat in formularul de "Login".
+      </p>
+      <figure typeof="sa:Image">
+        <img src="images/register.PNG" alt="Registerpage" />
+        <figcaption>Fig. 3 - Register page</figcaption>
+      </figure>
+      <p>
+        Utilizatorul va introduce username-ul dorit iar mai apoi va trebui sa
+        introduca parola de doua ori dupa care va apasa butonul
+        <strong>Register</strong>. In cazul in care parolele introduse nu sunt
+        identice, utilizatorul va fi instiintat cu un mesaj de eroare.
+      </p>
+      <figure typeof="sa:Image">
+        <img src="images/wrong-password.PNG" alt="Register wrong password" />
+        <figcaption>Fig. 4 - Register wrong password</figcaption>
+      </figure>
+      <p>
+        In cazul in care datele introduse sunt corecte, Utilizatorul va fi
+        redirectionat catre pagina principala a aplicatiei.
+      </p>
+      <p>
+        Server-ul va receptiona prin body datele utilizatorului, criptand
+        parola cu ajutorul pachetului
+        <a href="npmjs.com/package/bcrypt">Bcrypt</a>, iar mai apoi va salva
+        datele in tabela <strong>USERS</strong>. Pentru register se vor
+        implementa detaliile regasite in sectiunea Users, ruta
+        "/user/register".
+      </p>
+      <p>
+        Pentru cazurile de eroare, serverul va trimite status cod-urile
+        descrise in
+        <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+          Swagger-ul
+        </a>
+        atasat, iar Utilizatorul va fi instiintat printr-un mesaj care va
+        aparea in partea de sus a paginii. De exemplu pentru cazul in care
+        username-ul se afla deja in baza de date, Server-ul va trimite catre
+        Client status code-ul 409 impreuna cu mesajul: "Username already
+        exists". Clientul va afisa mesajul "Username already exists" pentru ca
+        Utilizatorul sa fie instiintat de ce nu s-a finalizat cu succes
+        inregistrarea.
+      </p>
+      <figure typeof="sa:Image">
+        <img src="images/register-already-exists.PNG" alt="Register user already exists" />
+        <figcaption>Fig. 5 - Register user already exists</figcaption>
+      </figure>
+      <h3>3. Pagina principală</h3>
+      <div>
+        <h4>
+          3.1 Pagina principala se poate regasi in doua moduri:
+        </h4>
+        <ul>
+          <li>
+            <strong>Modul create</strong> - cand utilizatorul se afla pe ruta
+            <i>http://BASE_URL/#create</i>, continutul canvasului este gol si
+            se pot vedea doar doua butoane <strong>Save</strong> si
+            <strong>New card</strong>.
+          </li>
+          <li>
+            <strong>Modul edit</strong> - cand utilizatorul se afla pe ruta
+            <i>http://BASE_URL/#create/:id</i>, continutul canvasului este cel
+            al cardului selectat din partea din stanga a paginii. Pe langa
+            cele doua butoane mentionate mai sus, mai apare un al treilea:
+            <strong>Share</strong>.
+          </li>
+        </ul>
+      </div>
 
-        <figure typeof="sa:Image">
-          <img
-            src="images//diagramaArhitecturala.PNG"
-            alt="DiagramaArhitecturala"
-          />
-          <figcaption>Fig. 15 - Diagrama Arhitecturală</figcaption>
-        </figure>
-      </section>
-      <section typeof="sa:Conclusion" id="conclusion">
-        <h2>Concluzie</h2>
+      <figure typeof="sa:Image">
+        <img src="images/home-page.PNG" alt="Home page create mode" />
+        <figcaption>Fig. 6 - Home page create mode</figcaption>
+      </figure>
+
+      <figure typeof="sa:Image">
+        <img src="images/home-page-edit-mode.PNG" alt="Home page edit mode" />
+        <figcaption>Fig. 7 - Home page edit mode</figcaption>
+      </figure>
+
+      <div>
+        <h4>
+          3.2 Pagina principala se imparte in trei sectiuni:
+        </h4>
+        <ul>
+          <li>
+            <strong>Previous cards</strong> - unde se regasesc toate cardurile
+            user-ului pe care le-a salvat in trecut.
+          </li>
+          <li>
+            <strong>Sectiunea cardului</strong> - aflata pe centrul paginii,
+            este locul destinat cardului care va fi editat sau creat, sub card
+            regasindu-se butoanele destinate actiunilor.
+          </li>
+          <li>
+            <strong>Panoul cu toolbar</strong> - unde se afla instrumentele cu
+            care utilizatorul poate edita cardul.
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div>
+          <h4>3.2.1 Previous cards</h4>
+          <p>
+            In sectiunea <strong>Previous cards</strong> sunt randate
+            cardurile deja create care apartin fiecarui utilizator.
+          </p>
+          <p>
+            <strong>Clientul</strong> afiseaza cate un card pentru fiecare
+            element alfat in baza de date <strong>CARDS</strong>. Cu ajutorul
+            metodei <strong>POST</strong> el trimite in payload jwt-ul salvat
+            in cookie, pe ruta <i>"${BASE_URL}/card"</i> destinata serverului.
+            Pentru mai multe detalii a se vedea in
+            <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+              Swagger </a>.
+          </p>
+          <p>
+            <strong>Serverul</strong> va trimite catre client toate cardurile
+            care corespund cu id-ul user-ului curent, in ordine
+            descrescatoare.
+          </p>
+
+          <p>
+            Cand <strong>Utilizatorul</strong> selecteaza un card, se va randa
+            in sectiunea de canvas cardul selectat.
+          </p>
+          <p>
+            <strong>Clientul</strong> trimite prin metoda
+            <strong>POST</strong> pe ruta
+            <i>"${BASE_URL}/card/:id"</i> body-ul care contine id-ul cardului
+            si jwt-ul utilizatorului.
+          </p>
+          <figure typeof="sa:Image">
+            <img src="images/edit-card.PNG" alt="Card selected" />
+            <figcaption>Fig. 8 - Card selected</figcaption>
+          </figure>
+
+          <p>
+            <strong>Server-ul</strong> receptioneaza metoda si verifica daca
+            utilizatorul are dreptul de a accesa cardul. Astfel, Utilizatorul
+            va putea accesa doar cardurile proprii pentru editare, nu si
+            cardurile celorlalti utilizatori. Daca totusi utilizatorul
+            incearca sa acceseze alt card, punand in url id-ul altui card,
+            acesta va fi instiintat printr-un mesaj de eroare.
+          </p>
+          <figure typeof="sa:Image">
+            <img src="images/card-not-found.PNG" alt="Card not found" />
+            <figcaption>Fig. 9 - Card not found</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div>
+        <h4>3.2.2 Toolbar</h4>
+        <div>
+          <strong>Elements</strong>
+          <p>
+            Sectiunea elements contine elemente geometrice care pot fi
+            adaugate in canvas. Pentru fiecare dintre acestea s-au folosit butoane,
+            care prin apasarea lor cu ajutorul urmatoarele clase din
+            biblioteca
+            <i>Fabric.js</i> s-au randat elementele in canvas:
+          </p>
+          <ul>
+            <li>Rect</li>
+            <li>Line</li>
+            <li>Circle</li>
+          </ul>
+          <p>
+            Acestea isi pot schimba culoarea apasand pe input-color-ul aflat
+            dedesubt sau pot fi sterse apasand pe butonul dedicat acestei
+            actiuni. Pentru ambele actiuni este necesar ca un element sa fie
+            selectat. Din biblioteca Fabric.js folosim metodele:
+          </p>
+          <ul>
+            <li><i>getActiveObject()</i> - pentru a selecta un element</li>
+            <li>
+              <i>remove(element)</i> - pentru a sterge unul sau mai multe
+              elemente
+            </li>
+            <li>
+              <i>set("fill", color)</i> - pentru a schimba culoarea unui
+              element
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h4>Draw</h4>
         <p>
-          În concluzie, aplicația <strong>ECAW</strong> este o aplicație Web
-          extensibilă pentru crearea digitală a unor ilustrate de diverse
-          categorii și împărtășirea acestora cu cei dragi. Pentru editare, vor
-          fi implementate operații precum undo-redo, drag & drop etc. Ilustrată
-          virtuală va poate fi partajată pe diverse rețele sociale și prin poștă
-          electronică.
+          Acesta sectiune este destinata modului de desenare in canvas. Pentru
+          acest lucru este nevoie sa setam initial <i>Canvasul</i> in modul
+          <i>isDrawingMode: false</i>. Ca si celelalte elemente, pentru a
+          trece in modul de desenare, s-a folosit un buton. La apasarea lui va
+          ramane selectat, acest lucru indicandu-ne faptul ca acum
+          <i>Canvasul</i> este in modul de editare. La nivel de implementare,
+          se seteaza proprietatea <i>isDrawingMode: true</i>.
         </p>
-      </section>
-      <section typeof="sa:ReferenceList" id="references">
-        <h2>Bibliografie</h2>
-        <ol>
-          <li
-            typeof="schema:ScholarlyArticle"
-            resource="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf"
-          >
-            <a
-              href="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf"
-            >
-              https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf
-            </a>
-          </li>
+        <p>
+          Pentru customizarea modului de desenare, se foloseste input-color-ul
+          pentru selectarea imaginii. Cu ajutorul bibliotecii Fabric.js se
+          seteaza proprietatea <i>canvas.freeDrawingBrush.color</i> cu
+          culoarea selectata din input-color. Pentru dimensiunea liniei, se
+          seteaza proprietatea <i>canvas.freeDrawingBrush.width</i> cu
+          dimensiunea introdusa in inputul width.
+        </p>
+      </div>
 
-          <li
-            typeof="schema:ScholarlyArticle"
-            resource="http://fabricjs.com/docs/"
-          >
-            <a href="http://fabricjs.com/docs/">
-              http://fabricjs.com/docs/
-            </a>
+      <div>
+        <h4>Text</h4>
+        <p>
+          Acest element este reprezentat printr-un input in care se introduce
+          textul dorit de Utilizator. In partea din dreapta a inputului se
+          regaseste un buton pentru schimbarea culorii (un input-color) si un
+          buton reprezentat printr-un <strong>+</strong> care
+          adauga textul in sectiunea de <i>Canvas</i>.
+        </p>
+        <p>
+          Acest lucru este posibil cu ajutorul bibliotecii Fabric.js, din care
+          se foloseste clasa <i>TextBox</i> pentru adaugarea continutului in
+          <i>Canvas</i>.
+        </p>
+      </div>
+
+      <div>
+        <h4>Image</h4>
+        <p>
+          Utilizatorul poate adauga o imagine prin doua moduri. Primul mod
+          este adaugarea unei imagini din laptop-ul personal, cea dea doua
+          este de a cauta imagini in sectiunea <strong>Search</strong>.
+        </p>
+        <p>
+          Sectiunea <strong>Upload</strong> este destinata pentru incarcarea imaginilor locale am adaugat un
+          eventListener "change" pe
+          addImage.
+          Dupa ce imaginea a fost incarcata de pe calculator folosesc functia <i>FileReader()</i> pentru transformarea
+          imaginii
+          in base64 dupa care adaug imaginea in canvas cu <i>fabric.Image.fromURL(imagine)</i>.
+        </p>
+        <p>
+          Sectiunea <strong>Search</strong> este reprezentata printr-un input
+          in care se scrie continutul dorit si mai jos se vor randa
+          rezultatele gasite. Acest lucru este posibil cu ajutorul API-ului
+          extern <a href="https://pixabay.com">https://pixabay.com</a>.
+        </p>
+        <p>
+          Din motive intemeiate (pentru evitarea unei erori de tipul CORS)
+          API-ul se va apela de catre <strong>Server</strong>. Astfel
+          <strong>Clientul</strong> trimite prin metoda <strong>POST</strong>,
+          pe ruta "http://BASE_URL/image", body-ul care contine continutul
+          dupa care se doreste sa se faca cautarea.
+        </p>
+        <p>
+          <strong>Server-ul</strong> intercepteaza continutul si cu ajutorul
+          metodei https <strong>GET</strong> face un call catre API-ul
+          specificat, avand nevoie de o cheie generata de acesta. Astfel
+          URL-ul apelat va fi
+          <i>https://pixabay.com/api/?key=${API_KEY}&q=${searchContent}</i>.
+          In cele din urma, API-ul va raspunde cu informatiile dorite (in format JSON) pe care
+          le trimite catre <strong>Client</strong>.
+        </p>
+      </div>
+
+      <div>
+        <h4>3.2.3 Card</h4>
+        <p>
+          In sectiunea Card se regasesete board-ul in care se creeaza cardul
+          iar mai jos butoanele de save, new card si share.
+        </p>
+        <p><strong>3.2.3.1 Save</strong></p>
+        <p>
+          In cazul in care Utilizatorul se afla in modul de creare, butonul
+          save este destinat salvarii in baza de date a unei noi entitati.
+          Pentru aceasta actiune, cand Utilizatorul apasa pe butonul
+          <strong>SAVE</strong>, <strong>Clientul</strong> trimite prin metoda
+          <strong>POST</strong>, pe ruta <i>"http://BASE_URL/create"</i>,
+          payload-ul care contine jwt-ul, userId, date, data, img (descris in
+          <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+            Swagger </a>).
+        </p>
+        <p>
+          <strong>Server-ul</strong> primeste datele de la
+          <strong>Client</strong> si le salveaza in tabela
+          <strong>Card</strong>, generand un id unic.
+        </p>
+        <p>
+          Cand Utilizatorul este in modul de editare, butonul
+          <strong>Save</strong> este destinat update-arii unui card specific.
+          Prin apasarea lui, trimite prin metoda <strong>PUT</strong>, pe ruta
+          <i>"http://BASE_URL/create"</i> body-ul care contine jwt-ul, id-ul
+          cardului, img, data.
+        </p>
+        <p>
+          <strong>Server-ul</strong> primeste datele si cauta in baza de date
+          dupa id-ul cardului, pentru care id-ul utilizatorului este acelasi cu
+          cel primit. Daca se gaseste elementul cu informatiile primite,
+          <strong>Server-ul</strong> va updata campurile <i>img</i>,
+          <i>data</i> cu cele primite in body, iar <i>date</i> cu data
+          curenta. Pentru celelale cazuri se va urmari
+          <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+            Swagger </a>.
+        </p>
+
+        <p><strong>3.2.3.2 Share</strong></p>
+        <p>
+          Acest buton va fi vizibil doar pentru modul de editare. Prin
+          apasarea lui se va crea un nou link si se copiaza in clipboard, pe
+          care Utilizatorul il poate trimite oricui doreste.
+        </p>
+
+        <figure typeof="sa:Image">
+          <img src="images/link-meesage.PNG" alt="Share card" />
+          <figcaption>Fig. 10 - Share card</figcaption>
+        </figure>
+
+        <p><strong>3.2.3.3 New Card</strong></p>
+        <p>
+          Acest buton este folosit pentru ca utilizatorul sa creeze un nou
+          card. In cazul in care el este in modul de editare, prin apasarea
+          lui va fi redirectionat catre ruta
+          <i>"http://BASE_URL/#create"</i> unde continutul canvas-ului va fi
+          gol. Acest lucru este posibil cu ajutorul bibliotecii Fabric.js,
+          apeland metoda <i>clear()</i>.
+        </p>
+
+        <p><strong>3.2.3.4 Copy, Paste, Redo, Undo</strong></p>
+        <p>Aplicația suporta și 4 comenzi rapide pentru manipularea canvasului si obiectelor din el:</p>
+        <ul>
+          <li>ctrl c: copiere</li>
+          <li>ctrl v: lipire</li>
+          <li>ctrl z: undo</li>
+          <li>ctrl x: redo</li>
+        </ul>
+        <p>
+          Acest lucru se realizeaza prin înregistrarea unui eveniment care ascultă la keydown și verifică dacă
+          evenimentul are codul specific.
+        </p>
+        <p>
+          Pentru comanda de copiere folosesc functia canvas.getActiveObject().clone prin care ii asignez unei variabile
+          globale _clipboard toate obiectele din canvas.getActiveObject().clone
+          Pentru comanda paste parcurg toate obiectele din _clipboard si le adaug pe rand in canvas cu coordonatele top
+          si left crescute cu valoarea 10.
+        </p>
+        <p>
+          Pentru functiile undo si redo am folosit doua variabile in functia _historyInit (historyUndo,historyRedo) in
+          care stocam canvasul in format json . Dupa ce anumite actiuni au fost efectuate
+          (added,removed,modified,skewing) starea canvasului este stocata. Atunci cand functia redo este apelata ultimul
+          element al variabilei historyRedo va fi sterse iar canvasul va fi incarcat cu tot ce este in history. Pentru
+          funcia undo am folosit push pentru a incarca starea urmatoare din history .</p>
+      </div>
+
+      <h3>4. Pagina de vizualizare</h3>
+      <div>
+        <p>
+          Aceasta pagina se afla pe ruta <i>"http://BASE_URL/#view/:id"</i> si
+          este destinata vizualizarii cardurilor share-uite. Aceasta pagina
+          este de asemenea responsive, pentru ca imaginea sa poata fi
+          vizualizata si pe mobile.
+        </p>
+        <figure typeof="sa:Image">
+          <img src="images/view-responsive.PNG" alt="Responsive view page" />
+          <figcaption>Fig. 11 - Responsive view page</figcaption>
+        </figure>
+        <p>
+          Din punct de vedere al implementarii, <strong>Clientul</strong> va
+          primi imaginea cardului prin metoda <strong>GET</strong>, apelata pe
+          ruta <i>http://BASE_URL/card/${view-section}</i>.
+          <strong>Server-ul</strong> va cauta in tabela
+          <strong>Card</strong> elementul care are id-ul egal cu cel primit
+          ca parametru, si va trimite sub forma de JSON raspunsul catre
+          <strong>Client</strong>. Alte detalii se pot regasi in
+          <a href="https://app.swaggerhub.com/apis-docs/PuriceAlexandra/cards/2.0.0#/">
+            Swagger </a>.
+        </p>
+        <figure typeof="sa:Image">
+          <img src="images/view-page.PNG" alt="View page" />
+          <figcaption>Fig. 12 - View page</figcaption>
+        </figure>
+      </div>
+
+
+
+    </section>
+
+    <h2>Structura proiectului</h2>
+    <h3>Client</h3>
+    <p>Proiectul va avea contine:</p>
+    <ul>
+      <li>app.js - unde se va randa clasa Router</li>
+      <li>
+        index.html - unicul fisier html in care continutul se va incarca in
+        functie de fisierele js
+      </li>
+      <li>style.css - fisierul destinat stilizarii</li>
+      <li>
+        router - care reprezinta folderul in care se vor gasi fisierele js in
+        care se implementeaza intreaga routare a aplicatiei. In functie de
+        denumirea din path se vor randa componentele specifice
+      </li>
+      <li>
+        service - folderul care contine toate fisierele cu elementele utile
+      </li>
+      <li>
+        views
+        <ul>
+          <li>
+            components - care contine clasele reutilizabile ale aplicatiei
           </li>
-          <li
-            typeof="schema:ScholarlyArticle"
-            resource="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
-          >
-            <a
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
-            >
-              https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
-            </a>
+          <li>pages - structura paginilor</li>
+        </ul>
+      </li>
+    </ul>
+    <h3>Server</h3>
+    <p>Structura proiectul va fi urmatoarea:</p>
+    <ul>
+      <li>app.js</li>
+      <li>package.json</li>
+      <li>
+        models - folder care contine fisierele pentru definirea schemelor din tabelele
+        din baza de date
+      </li>
+      <li>
+        routes
+        <ul>
+          <li>
+            card - folder in care se regasesc fisierle pentru operatiunile
+            destinate cardului (create, update, search)
           </li>
-          <li
-            typeof="schema:ScholarlyArticle"
-            resource="https://www.guru99.com/what-is-mongodb.html"
-          >
-            <a href="https://www.guru99.com/what-is-mongodb.html">
-              https://www.guru99.com/what-is-mongodb.html
-            </a>
+          <li>login - folder in care se regasesc fisierele pentru login</li>
+          <li>register - folder in care se regasesc fisierele pt registre</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Etape de dezvoltare</h2>
+    <h4>
+      Aplicația noastră web va fi dezvoltată în urmatoarele etape:
+    </h4>
+
+    <ol>
+      <li>
+        Arhitectura aplicaţiei Web
+        <p>
+          Un raport în formatul Scholarly HTML care va include:
+        </p>
+        <ul>
+          <li>
+            informaţii privind etapele principale ale dezvoltării proiectului
           </li>
-          <li
-            typeof="schema:ScholarlyArticle"
-            resource="https://www.npmjs.com/package/bcrypt"
-          >
-            <a href="https://www.npmjs.com/package/bcrypt">
-              https://www.npmjs.com/package/bcrypt
-            </a>
+          <li>maniera de interacţiune cu utilizatorul</li>
+          <li>
+            modul de folosire a sistemului de management al codului-sursă ales
           </li>
-        </ol>
-      </section>
-    </article>
-  </body>
+          <li>detalii referitoare la modelarea datelor</li>
+          <li>
+            soluţiile de stocare disponibile la nivel de client şi/sau server
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        Soluţia completă
+        <ul>
+          <li>Soluţia complet funcţională a proiectului</li>
+          <li>
+            Ghidul de utilizare a aplicaţiei dezvoltate – disponibil ca
+            document Scholarly HTML –, oferind capturi-ecran şi un film
+            demonstrativ cu o durată de 4—7 minute, la calitate HD
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <section>
+      <h2>Diagrama UML</h2>
+      <figure typeof="sa:Image">
+        <img src="images/UML.PNG" alt="Diagrama UML" />
+
+        <figcaption>Fig.13 - Diagrama UML</figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2>Diagrama Use-Case</h2>
+      <figure typeof="sa:Image">
+        <img src="images/use-case.PNG" alt="Diagrama Use-Case" />
+
+        <figcaption>Fig. 14 - Diagrama Use-Case</figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2>Diagrama Arhitecturala</h2>
+
+      <figure typeof="sa:Image">
+        <img src="images//diagramaArhitecturala.PNG" alt="DiagramaArhitecturala" />
+        <figcaption>Fig. 15 - Diagrama Arhitecturală</figcaption>
+      </figure>
+    </section>
+    <section typeof="sa:Conclusion" id="conclusion">
+      <h2>Concluzie</h2>
+      <p>
+        În concluzie, aplicația <strong>ECAW</strong> este o aplicație Web
+        extensibilă pentru crearea digitală a unor ilustrate de diverse
+        categorii și împărtășirea acestora cu cei dragi. Pentru editare, vor
+        fi implementate operații precum undo-redo, drag & drop etc. Ilustrată
+        virtuală va poate fi partajată pe diverse rețele sociale și prin poștă
+        electronică.
+      </p>
+    </section>
+    <section typeof="sa:ReferenceList" id="references">
+      <h2>Bibliografie</h2>
+      <ol>
+        <li typeof="schema:ScholarlyArticle"
+          resource="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf">
+          <a
+            href="https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf">
+            https://profs.info.uaic.ro/~busaco/teach/courses/staw/presentations/web01-ArhitecturaAplicatiilorWeb.pdf
+          </a>
+        </li>
+
+        <li typeof="schema:ScholarlyArticle" resource="http://fabricjs.com/docs/">
+          <a href="http://fabricjs.com/docs/">
+            http://fabricjs.com/docs/
+          </a>
+        </li>
+        <li typeof="schema:ScholarlyArticle" resource="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">
+          <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">
+            https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+          </a>
+        </li>
+        <li typeof="schema:ScholarlyArticle" resource="https://www.guru99.com/what-is-mongodb.html">
+          <a href="https://www.guru99.com/what-is-mongodb.html">
+            https://www.guru99.com/what-is-mongodb.html
+          </a>
+        </li>
+        <li typeof="schema:ScholarlyArticle" resource="https://www.npmjs.com/package/bcrypt">
+          <a href="https://www.npmjs.com/package/bcrypt">
+            https://www.npmjs.com/package/bcrypt
+          </a>
+        </li>
+      </ol>
+    </section>
+  </article>
+</body>
+
 </html>

@@ -14,7 +14,7 @@ router.get("/:id", (req, res, next) => {
     _id: id
   })
     .then(function(document) {
-      res.json(document);
+      res.status(200).json(document);
     })
     .catch(err => {
       res.status(404).json({
@@ -27,17 +27,17 @@ router.post("/:id", (req, res, next) => {
   let id = req.params.id;
   let token = req.body.jwt;
   jwt.verify(token, secret, function(err, decoded) {
-    if (err) return res.status(401).json({ error: "Not authorized" });
+    if (err) return res.status(401).json({ message: "Not authorized" });
     Card.find({
       _id: id,
       userId: decoded.id
     })
       .then(document => {
-        res.json(document);
+        res.status(200).json(document);
       })
       .catch(err => {
         res.status(404).json({
-          error: "card not found"
+          message: "card not found"
         });
       });
   });
@@ -50,7 +50,7 @@ router.post("/", (req, res, next) => {
     if (!err) {
       Card.find({ userId: decoded.id })
         .sort({ date: -1 })
-        .then(document => res.json(document))
+        .then(document => res.status(200).json(document))
         .catch(_err =>
           res.status(404).json({
             error: "Can not save card"
