@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="project, infoiasi, web, photos, videos, media" />
+    <link rel="shortcut icon" type="image/png" href="imagini/favicon.png" />
+    <title>Scenarii de utilizare-ECAW</title>
+    <link rel="stylesheet" href="scholarly.css" />
+    <link rel="stylesheet" href="prism-coy.css" />
+    <script src="node_modules/prismjs/prism.js" defer></script>
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+    <header>
+        <p class="title">Scenarii de utilizare pentru ECAW</p>
+        <p class="subtitle">Scenarii de utilizare pentru ECAW</p>
+    </header>
+    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+        <h1>Scenarii de utilizare pentru ECAW</h1>
+        <section>
+            <h2 style="display: none">Section</h2>
+            <ol>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="#" typeof="schema:Person">
+                        <span property="schema:givenName">Valentin George</span>
+                        <span property="schema:familyName">Todireanu</span>
+                    </a>
+                </li>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="#" typeof="schema:Person">
+                        <span property="schema:givenName">Maria-Alexandra</span>
+                        <span property="schema:familyName">Purice</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+
+        <section typeof="sa:MaterialsAndMethods" id="scenarii">
+            <h3>1. Utilizatorul doreste sa se conecteze in aplicatie, dar aceste greseste datele de autentificare</h3>
+
+            <figure typeof="sa:Image">
+                <img src="images/flow-2.PNG" alt="Login page" />
+                <figcaption>Fig. 1 - Login failed</figcaption>
+            </figure>
+
+            <h3>2. Utilizatorul se conecteaza cu succes si doreste sa creeze un nou card</h3>
+            <figure typeof="sa:Image">
+                <img src="images/first-flow.PNG" alt="Login page with error" />
+                <figcaption>Fig. 2 - Successfully login and create and save a new card </figcaption>
+            </figure>
+
+            <h3>3. Utilizatorul se conecteaza cu succes si selecteaza un card pe care doreste sa il editeze, iar mai
+                apoi il editeaza, il salveaza, iar cardul proaspat editat apare in sectiunea de <i>Previous cards</i>
+            </h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-3.PNG" alt="Registerpage" />
+                <figcaption>Fig. 3 - Edit an existing card</figcaption>
+            </figure>
+
+            <h3>4. Utilizatorul se conecteaza cu succes, selecteaza un card pe care mai apoi il distribuie pe alte
+                retele de socializare</h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-4.PNG" alt="Register wrong password" />
+                <figcaption>Fig. 4 - Share a card</figcaption>
+            </figure>
+
+            <h3>5. Un nou oaspete doreste sa se inregistreze in aplicatie dar foloseste un username care deja exista
+            </h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-5.PNG" alt="Home page create mode" />
+                <figcaption>Fig. 5 - Username already exists</figcaption>
+            </figure>
+
+            <h3>6. Un nou oaspete doreste sa se inregistreze in aplicatie dar scrie doua parole diferite</h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-6.PNG" alt="Home page edit mode" />
+                <figcaption>Fig. 6 - Wrong passroeds</figcaption>
+            </figure>
+
+            <h3>7. Un nou oaspete reuseste cu succes sa se intregistreze in aplicatie</h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-7.PNG" alt="Home page edit mode" />
+                <figcaption>Fig. 7 - Register successfully</figcaption>
+            </figure>
+
+            <h3>8. Utilizatorul vizualizeaza cardul primit fara a fi conectat</h3>
+            <figure typeof="sa:Image">
+                <img src="images/flow-8.PNG" alt="Home page edit mode" />
+                <figcaption>Fig. 8 - View card without register</figcaption>
+            </figure>
+        </section>
+    </article>
+</body>
+
+</html>
